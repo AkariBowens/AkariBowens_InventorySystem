@@ -40,7 +40,7 @@
             this.InventoryTextBox = new System.Windows.Forms.TextBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.idTextBox = new System.Windows.Forms.TextBox();
-            this.addButton = new System.Windows.Forms.Button();
+            this.addAssocPartButton = new System.Windows.Forms.Button();
             this.allPartsLabel = new System.Windows.Forms.Label();
             this.assocPartsLabel = new System.Windows.Forms.Label();
             this.addProductLabel = new System.Windows.Forms.Label();
@@ -163,14 +163,15 @@
             this.idTextBox.Size = new System.Drawing.Size(230, 39);
             this.idTextBox.TabIndex = 37;
             // 
-            // addButton
+            // addAssocPartButton
             // 
-            this.addButton.Location = new System.Drawing.Point(1304, 363);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(93, 48);
-            this.addButton.TabIndex = 51;
-            this.addButton.Text = "Add";
-            this.addButton.UseVisualStyleBackColor = true;
+            this.addAssocPartButton.Location = new System.Drawing.Point(1304, 363);
+            this.addAssocPartButton.Name = "addAssocPartButton";
+            this.addAssocPartButton.Size = new System.Drawing.Size(93, 48);
+            this.addAssocPartButton.TabIndex = 51;
+            this.addAssocPartButton.Text = "Add";
+            this.addAssocPartButton.UseVisualStyleBackColor = true;
+            this.addAssocPartButton.Click += new System.EventHandler(this.addAssocPartButton_Click);
             // 
             // allPartsLabel
             // 
@@ -229,6 +230,7 @@
             this.saveButton.TabIndex = 57;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // cancelButton
             // 
@@ -248,6 +250,7 @@
             this.deleteButton.TabIndex = 59;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // allPartsGridView
             // 
@@ -269,6 +272,8 @@
             this.assocPartsGridView.RowTemplate.Height = 28;
             this.assocPartsGridView.Size = new System.Drawing.Size(712, 194);
             this.assocPartsGridView.TabIndex = 61;
+            this.assocPartsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.assocPartsGridView_CellContentClick);
+            this.assocPartsGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.assocPartsDGVBindingComplete);
             // 
             // AddProductScreen
             // 
@@ -285,7 +290,7 @@
             this.Controls.Add(this.addProductLabel);
             this.Controls.Add(this.assocPartsLabel);
             this.Controls.Add(this.allPartsLabel);
-            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.addAssocPartButton);
             this.Controls.Add(this.minBoxLabel);
             this.Controls.Add(this.maxBoxLabel);
             this.Controls.Add(this.priceCostBoxLabel);
@@ -300,6 +305,7 @@
             this.Controls.Add(this.idTextBox);
             this.Name = "AddProductScreen";
             this.Text = "Add Product";
+            this.Load += new System.EventHandler(this.AddProductScreen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.allPartsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.assocPartsGridView)).EndInit();
             this.ResumeLayout(false);
@@ -321,7 +327,7 @@
         private System.Windows.Forms.TextBox InventoryTextBox;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.TextBox idTextBox;
-        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button addAssocPartButton;
         private System.Windows.Forms.Label allPartsLabel;
         private System.Windows.Forms.Label assocPartsLabel;
         private System.Windows.Forms.Label addProductLabel;

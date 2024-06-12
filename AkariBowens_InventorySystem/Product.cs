@@ -12,58 +12,64 @@ namespace AkariBowens_InventorySystem
     {
 
         // Attributes 
-        
-        // use if changing data visualization
-        // private List<Part> Parts = new List<Part>();
-        public BindingList<Part> AssociatedParts { get; set; } = new BindingList<Part>();
 
+        // use if changing data visualization
+        // private BindingList<Part> _parts;
+        public BindingList<Part> AssociatedParts = new BindingList<Part>();
+        // private BindingList<Part> Parts = new BindingList<Part>();
+        // public static BindingList<Part> Parts { get { return AssociatedParts; } }
         public int ProductID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int inStock { get; set; }
         public int Min { get; set; }
-        public int Max {get; set; }
+        public int Max {get; set; } 
 
-        public Product(int productIDNum, string productName, int numInStock, double productPrice, int Minimum, int Maximum, BindingList<Part> PartsAssociated = default)
+        public Product(int productIDNum, string productName, int numInStock, double productPrice, int Minimum, int Maximum)
         {
             // ID is auto created and incremental
             // int productIDNum = 
-
-
             ProductID = productIDNum;
-
             Name = productName;
             inStock = numInStock;
             Price = (decimal)productPrice;
             Min = Minimum;
             Max = Maximum;
-            AssociatedParts = PartsAssociated;
             
             Console.WriteLine("Storing new product called " + productName + ".\n");
-
         }
 
-        
+        //static Product EmptyProduct()
+        //{
 
-      
+        //}
 
         // -----Methods----- //
-
-        // static void addAssociatedPart(Part newPart) 
-        // {
+        public void addAssociatedPart(Part newPart) 
+        {
             //adds part to product
-            // Product.AssociatedParts.Add(newPart);
-        // }
+            Inventory.TempProduct.AssociatedParts.Add(newPart);
+        }
         
-        //static bool removeAssociatedPart(int partIDNum) 
-        //{ 
-            // returns bool
-        //}
+        public bool removeAssociatedPart(int partIDNum) 
+        {
+            if (Inventory.TempProduct.AssociatedParts.Remove(Inventory.TempProduct.AssociatedParts[partIDNum]))
+            {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        public static Part lookupAssociatedPart(int partIDNum)
+        {
+            Part foundPart = Inventory.AllParts[partIDNum];
+            Console.Write("Found " + foundPart);
+            return foundPart;
+        }
 
-        //static Part lookupAssociatedPart(int partIDNum)
-        //{
-            // returns Part
-        //}
-
+        // public BindingList<Part> returnList(Product selectedProduct)
+        // {
+            // return selectedProduct.parts;
+        // }
     }
 }

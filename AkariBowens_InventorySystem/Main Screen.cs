@@ -37,10 +37,12 @@ namespace AkariBowens_InventorySystem
         }
         
         // Change to products
-        private void propertiesAddButton_Click(object sender, EventArgs e)
+        private void productsAddButton_Click(object sender, EventArgs e)
         {
+            Inventory.TempProduct = new Product(0, " ", 0, 0, 0, 0);
             AddProductScreen newProductScreen = new AddProductScreen();
             newProductScreen.Show();
+           
         }
 
         private void partsModifyButton_Click(object sender, EventArgs e)
@@ -62,7 +64,7 @@ namespace AkariBowens_InventorySystem
                 //List<string> newList = new List<string>();
                 // Part TempPart = new Part(Inventory.LookupPart(Index));
                 // Inventory.lookupPart(Index);
-                Inventory.SelectedPart = Inventory.LookupPart(Index);
+                Inventory.SelectedPart = Inventory.lookupPart(Index);
   
             }
 
@@ -70,8 +72,22 @@ namespace AkariBowens_InventorySystem
             newModifyPartScreen.Show();
         }
 
-        private void propertiesModifyButton_Click(object sender, EventArgs e)
+        private void productsModifyButton_Click(object sender, EventArgs e)
         {
+            if (productsGridView.CurrentRow == null || !productsGridView.CurrentRow.Selected)
+            {
+                // Edit wording 
+                MessageBox.Show("There is nothing selected!", "Make a selection");
+                return;
+            }
+
+            if (productsGridView.CurrentRow.Selected)
+            {
+                // Gets index of selected row in product DGV
+                int prodIndex = productsGridView.CurrentCell.RowIndex;
+                Inventory.SelectedProduct = Inventory.LookupProduct(prodIndex);
+            }
+
             ModifyProduct newModifyProductScreen = new ModifyProduct();
             newModifyProductScreen.Show();
         }
@@ -92,8 +108,6 @@ namespace AkariBowens_InventorySystem
 
             // Removes empty bottom row
             productsGridView.AllowUserToAddRows = false;
-
-
 
             // ----------------------------------------------//
 
@@ -124,15 +138,9 @@ namespace AkariBowens_InventorySystem
             // public static List<string> newList { get; set; } = new List<string>();
 
             // Part.SelectedPartID = partsGridView.Columns[Index].Cells[0].Value;
-         
-            
                
              //newList.Append(partsGridView.Rows[Index].Cells[i].Value.ToString());
                 // Console.WriteLine(newList);
-
-            
-
-            
 
         }
 

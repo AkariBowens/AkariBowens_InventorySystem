@@ -15,6 +15,9 @@ namespace AkariBowens_InventorySystem
         public static BindingList<Part> AllParts = new BindingList<Part>();
 
         public static Part SelectedPart;
+        public static Product SelectedProduct;
+
+        public static Product TempProduct { get; set; }    
 
         // Methods // 
 
@@ -33,10 +36,12 @@ namespace AkariBowens_InventorySystem
             return true;
         }
 
-        //public Product lookupProduct(int partIndex) 
-        //{
-        //return;
-        //}
+        public static Product LookupProduct(int productIndex) 
+        {
+            Product tempProduct = AllProducts[productIndex];
+            Console.Write("Found " +  AllProducts[productIndex]);
+            return tempProduct;
+        }
 
         //public void updateProduct(int, Product) { }
 
@@ -56,6 +61,7 @@ namespace AkariBowens_InventorySystem
         public static Part lookupAssociatedPart(int partIndex)
         {
             Part partAssociated = AllParts[partIndex];
+            
             return partAssociated;
         }
 
@@ -78,13 +84,13 @@ namespace AkariBowens_InventorySystem
 
         // Looks up a part in AllParts list
         
-        public static Part LookupPart(int partIndex) 
+        public static Part lookupPart(int partIndex) 
         {
             Part foundPart = AllParts[partIndex];
 
-            Console.Write(AllParts[partIndex]);
+            Console.Write("Found " + AllParts[partIndex]);
             return foundPart;
-                // Part foundPart = new Part(Inventory.AllParts[partIndex]);
+               
         }
 
         // ----- Add from Main Screen partsSearchBar----- //
@@ -92,6 +98,7 @@ namespace AkariBowens_InventorySystem
         public void updatePart(int partIndex, Part currentPart) 
         {
             // check which field is different, then..
+            // lookup part, return it, fill modify page
             return;
         }
 

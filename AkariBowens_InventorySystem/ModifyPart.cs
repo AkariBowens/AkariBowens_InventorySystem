@@ -45,7 +45,6 @@ namespace AkariBowens_InventorySystem
             bool isValid = false;
             
             // Validation code here
-            
             if (isValid == true)
             {
                 addPartSave.Enabled =  true;

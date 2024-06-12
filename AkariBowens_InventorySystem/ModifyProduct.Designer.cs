@@ -64,6 +64,7 @@
             this.assocPartsGridView.RowTemplate.Height = 28;
             this.assocPartsGridView.Size = new System.Drawing.Size(713, 194);
             this.assocPartsGridView.TabIndex = 84;
+            this.assocPartsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.assocPartsGridView_CellContentClick);
             // 
             // allPartsGridView
             // 
@@ -74,6 +75,7 @@
             this.allPartsGridView.RowTemplate.Height = 28;
             this.allPartsGridView.Size = new System.Drawing.Size(713, 194);
             this.allPartsGridView.TabIndex = 83;
+            this.allPartsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.allPartsGridView_CellContentClick);
             // 
             // deleteButton
             // 
@@ -288,6 +290,7 @@
             this.Controls.Add(this.idTextBox);
             this.Name = "ModifyProduct";
             this.Text = "ModifyProduct";
+            this.Load += new System.EventHandler(this.ModifyProduct_Load);
             ((System.ComponentModel.ISupportInitialize)(this.assocPartsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.allPartsGridView)).EndInit();
             this.ResumeLayout(false);

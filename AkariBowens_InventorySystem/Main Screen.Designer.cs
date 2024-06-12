@@ -106,7 +106,7 @@
             this.productsModifyButton.TabIndex = 13;
             this.productsModifyButton.Text = "Modify";
             this.productsModifyButton.UseVisualStyleBackColor = true;
-            this.productsModifyButton.Click += new System.EventHandler(this.propertiesModifyButton_Click);
+            this.productsModifyButton.Click += new System.EventHandler(this.productsModifyButton_Click);
             // 
             // productsAddButton
             // 
@@ -118,7 +118,7 @@
             this.productsAddButton.TabIndex = 12;
             this.productsAddButton.Text = "Add";
             this.productsAddButton.UseVisualStyleBackColor = true;
-            this.productsAddButton.Click += new System.EventHandler(this.propertiesAddButton_Click);
+            this.productsAddButton.Click += new System.EventHandler(this.productsAddButton_Click);
             // 
             // partsSearchButton
             // 
