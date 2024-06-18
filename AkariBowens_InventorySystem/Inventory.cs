@@ -14,9 +14,7 @@ namespace AkariBowens_InventorySystem
         public static BindingList<Product> AllProducts = new BindingList<Product>();
         public static BindingList<Part> AllParts = new BindingList<Part>();
 
-        public static Part SelectedPart;
-        public static Product SelectedProduct;
-
+        public static Part SelectedPart { get; set; }
         public static Product TempProduct { get; set; }    
 
         // Methods // 
@@ -29,7 +27,7 @@ namespace AkariBowens_InventorySystem
             AllProducts.Add(insertedProduct);
         }
 
-        // Removes part from AllProducts
+        // Removes product from AllProducts
         public static bool removeProduct(int indexProductSelected)
         {
             AllProducts.RemoveAt(indexProductSelected);
@@ -38,12 +36,55 @@ namespace AkariBowens_InventorySystem
 
         public static Product LookupProduct(int productIndex) 
         {
-            Product tempProduct = AllProducts[productIndex];
-            Console.Write("Found " +  AllProducts[productIndex]);
-            return tempProduct;
+            Product foundProduct = AllProducts[productIndex];
+            Console.Write("Found " +  AllProducts[productIndex] + "\n");
+            return foundProduct;
         }
 
-        //public void updateProduct(int, Product) { }
+        public static void UpdateProduct(int productIdx, Product TempProduct) 
+        {
+            // Gets item in AllProducts, updates on contrasting values in same property, updates, and saves
+            
+            // Sets product to be changed
+            Product productToChange = AllProducts[productIdx];
+            Console.WriteLine("Associated Parts:" + TempProduct.AssociatedParts.Count);
+            
+
+            // If name taken...?
+            if (productToChange.Name != TempProduct.Name)
+            {
+                Console.WriteLine("Changing ProductName " + productToChange.Name + " to " + TempProduct.Name + "\n");
+                productToChange.Name = TempProduct.Name;
+            }
+
+            if (productToChange.Price != TempProduct.Price)
+            {
+                Console.WriteLine("Changing ProductPrice " + productToChange.Price + " to " + TempProduct.Price + "\n");
+                productToChange.Price = TempProduct.Price;
+            }
+
+            if (productToChange.InStock != TempProduct.InStock)
+            {
+                Console.WriteLine("Changing ProductInStock " + productToChange.InStock + " to " + TempProduct.InStock + "\n");
+                productToChange.InStock = TempProduct.InStock;
+            }
+
+            if (productToChange.Min != TempProduct.Min)
+            {
+                Console.WriteLine("Changing ProductMin " + productToChange.Min + " to " + TempProduct.Min + "\n");
+                productToChange.Min = TempProduct.Min;
+            }
+
+            if (productToChange.Max != TempProduct.Max)
+            {
+                Console.WriteLine("Changing ProductMax " + productToChange.Max + " to " + TempProduct.Max + "\n");
+                productToChange.Max = TempProduct.Max;
+            }
+
+            
+            Console.WriteLine("Associated Parts:" + AllProducts[productIdx].AssociatedParts.Count);
+            AllProducts.ResetBindings();    
+        }
 
         public static bool removeAssociatedPart(int associatedPart)
         {
@@ -88,14 +129,14 @@ namespace AkariBowens_InventorySystem
         {
             Part foundPart = AllParts[partIndex];
 
-            Console.Write("Found " + AllParts[partIndex]);
+            Console.Write("Found " + AllParts[partIndex] + "\n");
             return foundPart;
                
         }
 
         // ----- Add from Main Screen partsSearchBar----- //
         // Updates existing part in AllParts list
-        public void updatePart(int partIndex, Part currentPart) 
+        public static void updatePart(int partIndex, Part currentPart) 
         {
             // check which field is different, then..
             // lookup part, return it, fill modify page
@@ -111,9 +152,9 @@ namespace AkariBowens_InventorySystem
             AllProducts.Add(new Product(3, "testProduct3", 1, 212.99, 0, 1));
 
             // Adds default parts to AllParts
-            AllParts.Add(new Part(4, "testPart4", 1, 213.99, 0, 1));
-            AllParts.Add(new Part(5, "testPart5", 1, 214.99, 0, 1));
-            AllParts.Add(new Part(6, "testPart6", 1, 215.99, 0, 1));
+            AllParts.Add(new InHouse(4, "testPart4", 1, 213.99, 0, 1, 102256));
+            AllParts.Add(new Outsourced(5, "testPart5", 1, 214.99, 0, 1, "DirectLine Inc."));
+            AllParts.Add(new InHouse(6, "testPart6", 1, 215.99, 0, 1, 1065578));
 
         }
     };

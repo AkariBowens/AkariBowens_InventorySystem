@@ -19,10 +19,6 @@ namespace AkariBowens_InventorySystem
             InitializeComponent();
         }
 
-        //static Product Product()
-        // {
-            //Product().
-        //}
         private void addProductScreenLabel_Click(object sender, EventArgs e)
         {
 
@@ -159,7 +155,6 @@ namespace AkariBowens_InventorySystem
 
         private void addAssocPartButton_Click(object sender, EventArgs e)
         {
-            
             if (allPartsGridView.CurrentRow.Selected)
             { 
                 // if associatedparts list is !empty and first add, clear it 

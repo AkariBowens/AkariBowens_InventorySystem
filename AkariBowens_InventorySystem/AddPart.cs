@@ -120,6 +120,7 @@ namespace AkariBowens_InventorySystem
              {
                 Console.WriteLine(isValid);
                 Inventory.addPart(addPartCreation);
+                // Reset SelectedPart
                 Close();
              }
         }
@@ -182,9 +183,5 @@ namespace AkariBowens_InventorySystem
 
         }
 
-        // private string idTextBox_TextChanged(object sender, EventArgs e)
-        // {
-        // return idTextBox.Text;
-        // }
     }
 }

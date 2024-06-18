@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AkariBowens_InventorySystem
@@ -55,17 +48,12 @@ namespace AkariBowens_InventorySystem
                 return;
             }
 
-            // 
             // ---------- //
 
             if (partsGridView.CurrentRow.Selected)
             {
                 int Index = partsGridView.CurrentCell.RowIndex;
-                //List<string> newList = new List<string>();
-                // Part TempPart = new Part(Inventory.LookupPart(Index));
-                // Inventory.lookupPart(Index);
                 Inventory.SelectedPart = Inventory.lookupPart(Index);
-  
             }
 
             ModifyPartScreen newModifyPartScreen = new ModifyPartScreen();
@@ -84,8 +72,9 @@ namespace AkariBowens_InventorySystem
             if (productsGridView.CurrentRow.Selected)
             {
                 // Gets index of selected row in product DGV
-                int prodIndex = productsGridView.CurrentCell.RowIndex;
-                Inventory.SelectedProduct = Inventory.LookupProduct(prodIndex);
+                // int CurrentRow = productsGridView.CurrentRow.Index;
+                // Inventory.TempProduct.ProdIdx
+                Inventory.TempProduct = Inventory.LookupProduct(productsGridView.CurrentCell.RowIndex);
             }
 
             ModifyProduct newModifyProductScreen = new ModifyProduct();
@@ -95,6 +84,7 @@ namespace AkariBowens_InventorySystem
         private void mainScreen_Load(object sender, EventArgs e)
         {
             // Sets AllProducts DataSource //
+
             productsGridView.DataSource = Inventory.AllProducts;
 
             // Highlights full row on selection
@@ -125,22 +115,10 @@ namespace AkariBowens_InventorySystem
 
             // Removes empty bottom row
             partsGridView.AllowUserToAddRows = false;
-
-
-            // ----- //
-            // public static int partsIndex;
     }
 
         private void partsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            // int Index = partsGridView.CurrentRow.Index;
-            // public static List<string> newList { get; set; } = new List<string>();
-
-            // Part.SelectedPartID = partsGridView.Columns[Index].Cells[0].Value;
-               
-             //newList.Append(partsGridView.Rows[Index].Cells[i].Value.ToString());
-                // Console.WriteLine(newList);
 
         }
 
@@ -152,26 +130,22 @@ namespace AkariBowens_InventorySystem
 
         private void partsDeleteButton_Click(object sender, EventArgs e)
         {
+            
             // Clear selection on products
-
             if (partsGridView.CurrentRow == null || !partsGridView.CurrentRow.Selected)
             {
                 // Edit wording 
                 MessageBox.Show("There is nothing selected!", "Make a selection");
                 return;
             }
-            
 
             // Grabs index of selected item in partsDGV
             int Index = partsGridView.CurrentCell.RowIndex;
-            // Console.WriteLine();
-            // use this and find the part and pass it to the method
 
             // Removes indexed item from AllParts list
-            // - grab part data from currentcell
             Inventory.deletePart(Inventory.AllParts[Index]);
 
-            // Resets current selected cell == null
+            // Resets current selected cell
             partsGridView.ClearSelection();
         }
 
@@ -295,12 +269,6 @@ namespace AkariBowens_InventorySystem
                 productsGridView.DataSource = Inventory.AllProducts;
             }
         }
-
-        // private void productsGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        //{
-            // Clears default productsGridView bindingComplete selection
-            
-        // }
 
         private void productsPartsDGVBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {

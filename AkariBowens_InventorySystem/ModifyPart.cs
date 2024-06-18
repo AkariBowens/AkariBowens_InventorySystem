@@ -26,7 +26,7 @@ namespace AkariBowens_InventorySystem
 
         private void ModifyPartScreen_Load(object sender, EventArgs e)
         {
-           // Loop the different properties of ModifyPartScreen and fill from Inventory.SelectedPart
+            // Disables ability to edit ID field
             addPartSave.Enabled = false;
 
             // Pre-populate fields
@@ -37,7 +37,6 @@ namespace AkariBowens_InventorySystem
             maxTextBox.Text = Inventory.SelectedPart.Max.ToString();
             minTextBox.Text = Inventory.SelectedPart.Min.ToString();
 
-            // MachineID or CompanyName
         }
 
         private void addPartSave_Click(object sender, EventArgs e)

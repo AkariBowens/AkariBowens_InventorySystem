@@ -28,14 +28,13 @@ namespace AkariBowens_InventorySystem
         // public int Min;
         public int Min { get; set; }
 
+        
 
         // Add "Inhouse" & "Outsourced" -- either/or -- inheritance
-        public int MachineID { get; set; }
-        public string CompanyName { get; set; }
 
         // Part constructor
         // add two variables, 1 for company, one for machineid - both optional and boolean, if bool == true etc...
-        public Part(int partIDnum, string partName, int partInStock, double partPrice, int partMin, int partMax, int machinePartID = default, string partCompanyName = default)
+        public Part(int partIDnum, string partName, int partInStock, double partPrice, int partMin, int partMax)
         {
             PartID = partIDnum;
             Name = partName;
@@ -44,9 +43,8 @@ namespace AkariBowens_InventorySystem
             Price = (decimal)partPrice;
             Min = partMin;
             Max = partMax;
-            // int machineID; - if inHouse
-            machinePartID = MachineID;
-            partCompanyName = CompanyName;
+    
+   
             Console.WriteLine("Storing new product called " + partName + ".\n");
             
         }

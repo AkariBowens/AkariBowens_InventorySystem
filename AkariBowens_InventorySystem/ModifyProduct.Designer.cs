@@ -65,6 +65,7 @@
             this.assocPartsGridView.Size = new System.Drawing.Size(713, 194);
             this.assocPartsGridView.TabIndex = 84;
             this.assocPartsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.assocPartsGridView_CellContentClick);
+            this.assocPartsGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.assocPartsDGVBindingComplete);
             // 
             // allPartsGridView
             // 
@@ -85,6 +86,7 @@
             this.deleteButton.TabIndex = 82;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // cancelButton
             // 
@@ -104,6 +106,7 @@
             this.saveButton.TabIndex = 80;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // searchTextBox
             // 
@@ -157,6 +160,7 @@
             this.addButton.TabIndex = 74;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // minBoxLabel
             // 
