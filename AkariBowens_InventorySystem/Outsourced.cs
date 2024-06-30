@@ -9,7 +9,9 @@ namespace AkariBowens_InventorySystem
     internal class Outsourced : Part
     {
         public Outsourced(int partIDnum, string partName, int partInStock, double partPrice, int partMin, int partMax, string companyName)
-            : base(partIDnum, partName, partInStock, partPrice, partMin, partMax) => company = companyName;
-        public string company;
+            : base(partIDnum, partName, partInStock, partPrice, partMin, partMax) => Company = companyName;
+        public string Company { get; set; }
+
+        // public static Outsourced SelectedOutsourced { get; set; }
     }
 }

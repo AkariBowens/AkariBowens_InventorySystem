@@ -82,6 +82,7 @@ namespace AkariBowens_InventorySystem
             priceCostTextBox.Text = Inventory.TempProduct.Price.ToString();
             maxTextBox.Text = Inventory.TempProduct.Max.ToString();
             minTextBox.Text = Inventory.TempProduct.Min.ToString();
+
         }
 
         private void addButton_Click(object sender, EventArgs e)

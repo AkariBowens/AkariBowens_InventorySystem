@@ -8,7 +8,7 @@ namespace AkariBowens_InventorySystem
 {
     // class Part is abstract
     // add abstract keyword
-    internal class Part
+    internal abstract class Part
     {
         // Attributes
         // public int PartID;
@@ -27,13 +27,8 @@ namespace AkariBowens_InventorySystem
         public int Max { get; set; }
         // public int Min;
         public int Min { get; set; }
-
         
-
-        // Add "Inhouse" & "Outsourced" -- either/or -- inheritance
-
         // Part constructor
-        // add two variables, 1 for company, one for machineid - both optional and boolean, if bool == true etc...
         public Part(int partIDnum, string partName, int partInStock, double partPrice, int partMin, int partMax)
         {
             PartID = partIDnum;
@@ -43,13 +38,9 @@ namespace AkariBowens_InventorySystem
             Price = (decimal)partPrice;
             Min = partMin;
             Max = partMax;
-    
    
             Console.WriteLine("Storing new product called " + partName + ".\n");
-            
         }
-
-        // Part creation shorthand Part.argsList(<struct> or string<>){return Part("","","",...)
     }
 
     

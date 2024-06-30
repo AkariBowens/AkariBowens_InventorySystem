@@ -52,10 +52,11 @@ namespace AkariBowens_InventorySystem
 
             if (partsGridView.CurrentRow.Selected)
             {
-                int Index = partsGridView.CurrentCell.RowIndex;
-                Inventory.SelectedPart = Inventory.lookupPart(Index);
+                Inventory.SelectedPart = Inventory.LookupPart(partsGridView.CurrentRow.Index);
             }
 
+            Console.WriteLine(Inventory.SelectedPart.GetType())
+;
             ModifyPartScreen newModifyPartScreen = new ModifyPartScreen();
             newModifyPartScreen.Show();
         }
@@ -72,8 +73,6 @@ namespace AkariBowens_InventorySystem
             if (productsGridView.CurrentRow.Selected)
             {
                 // Gets index of selected row in product DGV
-                // int CurrentRow = productsGridView.CurrentRow.Index;
-                // Inventory.TempProduct.ProdIdx
                 Inventory.TempProduct = Inventory.LookupProduct(productsGridView.CurrentCell.RowIndex);
             }
 
@@ -119,7 +118,7 @@ namespace AkariBowens_InventorySystem
 
         private void partsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            Inventory.SelectedPartIndex = partsGridView.CurrentCell.RowIndex;
         }
 
         private void partsDGVBindComplete(object sender, DataGridViewBindingCompleteEventArgs e)

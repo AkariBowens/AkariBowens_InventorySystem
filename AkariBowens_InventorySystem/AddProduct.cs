@@ -158,7 +158,7 @@ namespace AkariBowens_InventorySystem
             if (allPartsGridView.CurrentRow.Selected)
             { 
                 // if associatedparts list is !empty and first add, clear it 
-                Part currentPart = Inventory.lookupPart(allPartsGridView.CurrentRow.Index);
+                Part currentPart = Inventory.LookupPart(allPartsGridView.CurrentRow.Index);
                 Inventory.TempProduct.addAssociatedPart(currentPart);
                 allPartsGridView.ClearSelection();
             }

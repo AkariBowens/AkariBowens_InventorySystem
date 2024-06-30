@@ -9,7 +9,7 @@ namespace AkariBowens_InventorySystem
     internal class InHouse : Part
     {
         public InHouse(int partIDnum, string partName, int partInStock, double partPrice, int partMin, int partMax, int machineID)
-            : base(partIDnum, partName, partInStock, partPrice, partMin, partMax) => mID = machineID;
+            : base(partIDnum, partName, partInStock, partPrice, partMin, partMax) => InHouseID = machineID;
 
         // Use after I automate ID
         // public InHouse(int partIDnum, string partName, int partInStock, double partPrice, int partMin, int partMax)
@@ -17,7 +17,10 @@ namespace AkariBowens_InventorySystem
         // {
 
         // }
+       
+        public int InHouseID { get; set; }
 
-        public int mID;
+        // public static InHouse SelectedInHouse { get; set; }
+        
     }
 }

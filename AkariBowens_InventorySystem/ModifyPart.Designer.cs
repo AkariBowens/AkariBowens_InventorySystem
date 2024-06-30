@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.machineIDBoxLabel = new System.Windows.Forms.Label();
+            this.varAddPartLabel = new System.Windows.Forms.Label();
             this.minBoxLabel = new System.Windows.Forms.Label();
             this.maxBoxLabel = new System.Windows.Forms.Label();
             this.priceCostBoxLabel = new System.Windows.Forms.Label();
             this.inventoryBoxLabel = new System.Windows.Forms.Label();
             this.nameBoxLabel = new System.Windows.Forms.Label();
             this.idBoxLabel = new System.Windows.Forms.Label();
-            this.companyNameTextBox = new System.Windows.Forms.TextBox();
+            this.varInputTextBox = new System.Windows.Forms.TextBox();
             this.minTextBox = new System.Windows.Forms.TextBox();
             this.maxTextBox = new System.Windows.Forms.TextBox();
             this.priceCostTextBox = new System.Windows.Forms.TextBox();
@@ -51,16 +51,16 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // machineIDBoxLabel
+            // varAddPartLabel
             // 
-            this.machineIDBoxLabel.AutoSize = true;
-            this.machineIDBoxLabel.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.machineIDBoxLabel.Location = new System.Drawing.Point(90, 454);
-            this.machineIDBoxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.machineIDBoxLabel.Name = "machineIDBoxLabel";
-            this.machineIDBoxLabel.Size = new System.Drawing.Size(134, 28);
-            this.machineIDBoxLabel.TabIndex = 37;
-            this.machineIDBoxLabel.Text = "Machine ID";
+            this.varAddPartLabel.AutoSize = true;
+            this.varAddPartLabel.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.varAddPartLabel.Location = new System.Drawing.Point(90, 454);
+            this.varAddPartLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.varAddPartLabel.Name = "varAddPartLabel";
+            this.varAddPartLabel.Size = new System.Drawing.Size(134, 28);
+            this.varAddPartLabel.TabIndex = 37;
+            this.varAddPartLabel.Text = "Machine ID";
             // 
             // minBoxLabel
             // 
@@ -128,14 +128,15 @@
             this.idBoxLabel.TabIndex = 31;
             this.idBoxLabel.Text = "ID";
             // 
-            // companyNameTextBox
+            // varInputTextBox
             // 
-            this.companyNameTextBox.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.companyNameTextBox.Location = new System.Drawing.Point(229, 448);
-            this.companyNameTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.companyNameTextBox.Name = "companyNameTextBox";
-            this.companyNameTextBox.Size = new System.Drawing.Size(155, 39);
-            this.companyNameTextBox.TabIndex = 30;
+            this.varInputTextBox.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.varInputTextBox.Location = new System.Drawing.Point(229, 448);
+            this.varInputTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.varInputTextBox.Name = "varInputTextBox";
+            this.varInputTextBox.Size = new System.Drawing.Size(155, 39);
+            this.varInputTextBox.TabIndex = 30;
+            this.varInputTextBox.TextChanged += new System.EventHandler(this.companyNameTextBox_TextChanged);
             // 
             // minTextBox
             // 
@@ -216,6 +217,7 @@
             this.outsourcedRadioButton.Text = "Outsourced";
             this.outsourcedRadioButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.outsourcedRadioButton.UseVisualStyleBackColor = true;
+            this.outsourcedRadioButton.CheckedChanged += new System.EventHandler(this.outsourcedRadioButton_CheckedChanged);
             // 
             // inHouseRadioButton
             // 
@@ -230,6 +232,7 @@
             this.inHouseRadioButton.Text = "In-House";
             this.inHouseRadioButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.inHouseRadioButton.UseVisualStyleBackColor = true;
+            this.inHouseRadioButton.CheckedChanged += new System.EventHandler(this.inHouseRadioButton_CheckedChanged);
             // 
             // addPartSave
             // 
@@ -271,14 +274,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 685);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.machineIDBoxLabel);
+            this.Controls.Add(this.varAddPartLabel);
             this.Controls.Add(this.minBoxLabel);
             this.Controls.Add(this.maxBoxLabel);
             this.Controls.Add(this.priceCostBoxLabel);
             this.Controls.Add(this.inventoryBoxLabel);
             this.Controls.Add(this.nameBoxLabel);
             this.Controls.Add(this.idBoxLabel);
-            this.Controls.Add(this.companyNameTextBox);
+            this.Controls.Add(this.varInputTextBox);
             this.Controls.Add(this.minTextBox);
             this.Controls.Add(this.maxTextBox);
             this.Controls.Add(this.priceCostTextBox);
@@ -302,14 +305,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Label machineIDBoxLabel;
+        private System.Windows.Forms.Label varAddPartLabel;
         private System.Windows.Forms.Label minBoxLabel;
         private System.Windows.Forms.Label maxBoxLabel;
         private System.Windows.Forms.Label priceCostBoxLabel;
         private System.Windows.Forms.Label inventoryBoxLabel;
         private System.Windows.Forms.Label nameBoxLabel;
         private System.Windows.Forms.Label idBoxLabel;
-        private System.Windows.Forms.TextBox companyNameTextBox;
+        private System.Windows.Forms.TextBox varInputTextBox;
         private System.Windows.Forms.TextBox minTextBox;
         private System.Windows.Forms.TextBox maxTextBox;
         private System.Windows.Forms.TextBox priceCostTextBox;
