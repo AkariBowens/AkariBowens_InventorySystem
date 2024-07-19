@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
@@ -15,7 +16,7 @@ namespace AkariBowens_InventorySystem
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void AddPartCancelButton(object sender, EventArgs e)
         {
             Close();
         }
@@ -29,6 +30,9 @@ namespace AkariBowens_InventorySystem
 
         private void addPartScreen_Load(object sender, EventArgs e)
         {
+            // starts with one or the other checked
+            outsourcedRadioButton.Checked = true;
+            idTextBox.Enabled = false;
         }
 
         private void inHouseRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -54,20 +58,7 @@ namespace AkariBowens_InventorySystem
             // Limit partPrice to two decimal places -- make new variables for new Part 
             int isValid = 0;
 
-            int addPartId;
-            if (int.TryParse(idTextBox.Text, out addPartId))
-            {
-                Console.WriteLine("Converting " + addPartId + " ...\n");
-                isValid ++;
-                
-            }
-            else
-            {
-                Console.WriteLine("Input " + idTextBox.Text + " not an int\n");
-            }
-
             string addPartName = nameTextBox.Text;
-            
 
             // Checks if inventory input is an int
             int addPartInv;
@@ -80,6 +71,7 @@ namespace AkariBowens_InventorySystem
             else
             {
                 Console.WriteLine("Input " + InventoryTextBox.Text + " not an integer\n");
+                InventoryTextBox.BackColor = Color.Red;
             }
 
             // Checks if partPrice input is a decimal
@@ -93,6 +85,7 @@ namespace AkariBowens_InventorySystem
             else
             {
                 Console.WriteLine("Input " + priceCostTextBox.Text + " not a decimal\n");
+                priceCostTextBox.BackColor = Color.Red;
             }
 
             // Checks if partMax input is an int
@@ -106,6 +99,7 @@ namespace AkariBowens_InventorySystem
             else
             {
                 Console.WriteLine("Input " + maxTextBox.Text + " not an \n");
+                maxTextBox.BackColor = Color.Red;
             }
 
             // Make sure part is (int)
@@ -119,13 +113,27 @@ namespace AkariBowens_InventorySystem
             else
             {
                 Console.WriteLine("Input " + minTextBox.Text + " not an int\n");
+                minTextBox.BackColor = Color.Red;
             }
 
-            // Add the inhouse and outsourced validations
+            if (addPartMin > addPartMax)
+            {
+                isValid--;
+                MessageBox.Show("Minimum must be less than Maximum.");
+                maxTextBox.BackColor = Color.Tomato;
+                minTextBox.BackColor = Color.Tomato;
+            }
 
-           
-            
-            if (isValid == 5)
+            if (addPartInv < addPartMin || addPartInv > addPartMax)
+            {
+                isValid--;
+                MessageBox.Show("Inventory must be within min/max range.");
+                InventoryTextBox.BackColor = Color.Tomato;
+            }
+
+
+
+            if (isValid == 4)
             {
                 // I need to make sure that one of these is absolutely checked
 
@@ -138,7 +146,7 @@ namespace AkariBowens_InventorySystem
                         {
                             Console.WriteLine("Converting " + varInputTextBox.Text + "...\n");
 
-                            InHouse NewPart = new InHouse(addPartId, addPartName, addPartInv, addPartPrice, addPartMax, addPartMin, addPartMachineID);
+                            InHouse NewPart = new InHouse(Inventory.GlobalPartID++, addPartName, addPartInv, addPartPrice, addPartMax, addPartMin, addPartMachineID);
                             Inventory.addPart(NewPart);
                             Close();
                         }
@@ -146,6 +154,7 @@ namespace AkariBowens_InventorySystem
                         {
                             // Change these to message boxes on product and part
                             Console.WriteLine("Input " + varInputTextBox.Text + " not an int\n");
+                            varInputTextBox.BackColor = Color.Red;
                             return;
                         }
 
@@ -155,7 +164,7 @@ namespace AkariBowens_InventorySystem
                     {
                         
                         string addPartCompanyName = varInputTextBox.Text;
-                        Outsourced NewPart = new Outsourced(addPartId, addPartName, addPartInv, addPartPrice, addPartMax, addPartMin, addPartCompanyName);
+                        Outsourced NewPart = new Outsourced(Inventory.GlobalPartID++, addPartName, addPartInv, addPartPrice, addPartMax, addPartMin, addPartCompanyName);
                       
                         Inventory.addPart(NewPart);
                         Close();
@@ -165,26 +174,6 @@ namespace AkariBowens_InventorySystem
                 }
 
             }
-
-            // 
-            // {
-            // if inhouse.checked
-            // if (Inventory.SelectedPart.isOutsourced)
-            // {
-            //        Console.WriteLine(isValid);
-            // Inventory.addPart(addPartCreation);
-            // Reset SelectedPart
-            //       Close();
-            //   }
-            //    else
-            //    {
-            //        Console.WriteLine(isValid);
-            // Inventory.addPart(outsourcedPartCreation);
-            // Reset SelectedPart
-            //        Close();
-            //    }
-
-            // }
         }
 
         
@@ -244,6 +233,31 @@ namespace AkariBowens_InventorySystem
         }
 
         private void companyGB_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

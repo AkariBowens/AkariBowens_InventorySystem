@@ -53,10 +53,10 @@ namespace AkariBowens_InventorySystem
             if (partsGridView.CurrentRow.Selected)
             {
                 Inventory.SelectedPart = Inventory.LookupPart(partsGridView.CurrentRow.Index);
+                Inventory.SelectedPartIndex = Inventory.AllParts.IndexOf(Inventory.SelectedPart);
+                Console.WriteLine(Inventory.SelectedPartIndex);
             }
 
-            Console.WriteLine(Inventory.SelectedPart.GetType())
-;
             ModifyPartScreen newModifyPartScreen = new ModifyPartScreen();
             newModifyPartScreen.Show();
         }
@@ -73,7 +73,8 @@ namespace AkariBowens_InventorySystem
             if (productsGridView.CurrentRow.Selected)
             {
                 // Gets index of selected row in product DGV
-                Inventory.TempProduct = Inventory.LookupProduct(productsGridView.CurrentCell.RowIndex);
+                Inventory.TempProduct = Inventory.LookupProduct(productsGridView.CurrentRow.Index);
+                Inventory.TempProductIndex = Inventory.AllProducts.IndexOf(Inventory.TempProduct);
             }
 
             ModifyProduct newModifyProductScreen = new ModifyProduct();
@@ -83,7 +84,6 @@ namespace AkariBowens_InventorySystem
         private void mainScreen_Load(object sender, EventArgs e)
         {
             // Sets AllProducts DataSource //
-
             productsGridView.DataSource = Inventory.AllProducts;
 
             // Highlights full row on selection
@@ -118,6 +118,7 @@ namespace AkariBowens_InventorySystem
 
         private void partsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Remake indexing
             Inventory.SelectedPartIndex = partsGridView.CurrentCell.RowIndex;
         }
 
@@ -137,12 +138,21 @@ namespace AkariBowens_InventorySystem
                 MessageBox.Show("There is nothing selected!", "Make a selection");
                 return;
             }
-
+            
             // Grabs index of selected item in partsDGV
             int Index = partsGridView.CurrentCell.RowIndex;
-
+            // -- maybe remake above indexing -- //
+            
+            DialogResult confirmationResult = MessageBox.Show("Are you sure you want to delete this?", "Delete Part", MessageBoxButtons.YesNo);
             // Removes indexed item from AllParts list
-            Inventory.deletePart(Inventory.AllParts[Index]);
+
+            if (confirmationResult == DialogResult.Yes)
+            {
+                if (!Inventory.deletePart(Inventory.AllParts[Index]))
+                {
+                    MessageBox.Show("Part is associated with a Product");
+                }
+            }
 
             // Resets current selected cell
             partsGridView.ClearSelection();
@@ -159,14 +169,23 @@ namespace AkariBowens_InventorySystem
                 return; 
             }
 
-            partsGridView.ClearSelection();
             // Grabs index of selected item in productDGV
             int Index = productsGridView.CurrentCell.RowIndex;
 
+            DialogResult confirmationResult = MessageBox.Show("Are you sure you want to delete this?", "Delete Product", MessageBoxButtons.YesNo);
             // Calls removeProduct and removes indexed item from AllProducts list
-            Inventory.removeProduct(Index);
+            if (confirmationResult == DialogResult.Yes)
+            {
+                if (Inventory.LookupProduct(productsGridView.CurrentRow.Index).AssociatedParts.Count > 0)
+                {
+                    MessageBox.Show("Product has a part associated with it.");
+                } else
+                {
+                    Inventory.removeProduct(Index);
+                }
+            }
 
-            // Resets current selected cell == null
+            // Resets current selected cell to false
             productsGridView.ClearSelection();
         }
 
@@ -176,38 +195,26 @@ namespace AkariBowens_InventorySystem
             // option to filter by specific param. i.e. name, price, id
             // have a reset button to return to original list
 
-            // connect all of this to only search when "searchButton" is pressed
             BindingList<Part> TempPartsList = new BindingList<Part>();
             partsGridView.ClearSelection();
             bool partFound = false;
 
-            // int rowIndex;
-            // if (Int32.TryParse(partsSearchBar.Text, out rowIndex))
-            // {
-                // Inventory.lookupPart(rowIndex);
-            // } 
-
-            // if part is a num then else v
+            // 
             if (partsSearchBar.Text != "")
             {
-                // this is where the switch statement would be placed -- While loop
                 for (int i = 0; i < Inventory.AllParts.Count; i++)
                 {
-                    // lookUp part would go here - Inventory.lookupPart(Index).Contains(partsSearchBar.Text.ToUpper()))
+                    // Searches Names of Parts in AllParts
                     if (Inventory.AllParts[i].Name.ToUpper().Contains(partsSearchBar.Text.ToUpper()))
                     {
                         TempPartsList.Add(Inventory.AllParts[i]);
                         partFound = true;
-                    }
-                    
+                    }    
                 }
                 if (partFound)
                 {
                     partsGridView.DataSource = TempPartsList;
                 }
-                
-                // Inventory.lookupPart(Index);
-                
             }
 
             // This part is annoying. It pops up at every option, create a while loop?
@@ -225,8 +232,7 @@ namespace AkariBowens_InventorySystem
             // if (partsGridView.CurrentCell.Selected)
             // Part CurrentPart = new Part(partsGridView.CurrentCell) 
             // int Index = partsGridView.CurrentCell.RowIndex;
-            // Inventory.lookUpPart(Index, CurrentPart)
-            // 
+            // Inventory.lookUpPart(Index, CurrentPart) 
         }
 
         private void productsSearchBar_TextChanged(object sender, EventArgs e)

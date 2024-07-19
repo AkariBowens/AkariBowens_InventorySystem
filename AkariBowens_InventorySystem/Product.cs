@@ -9,38 +9,35 @@ namespace AkariBowens_InventorySystem
 
         // Attributes 
         public BindingList<Part> AssociatedParts = new BindingList<Part>();
-        public int ProductID { get; set; }
+        public int ProductID { get; set; } 
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int InStock { get; set; }
         public int Min { get; set; }
         public int Max {get; set; } 
-        public int ProdIdx { get; set; }
 
         public Product(int productIDNum, string productName, int numInStock, double productPrice, int Minimum, int Maximum)
         {
-            // ID is auto created and incremental
-            // int productIDNum = 
+             
             ProductID = productIDNum;
             Name = productName;
             InStock = numInStock;
-            Price = (decimal)productPrice;
+            Price = Math.Round((decimal)productPrice, 2);
             Min = Minimum;
             Max = Maximum;
             Console.WriteLine("Storing new product called " + productName + ".\n");
         }
 
-        // Should i put an object in this object?
+        
 
         // -----Methods----- //
         public void addAssociatedPart(Part newPart) 
         {
-            //Adds part to TempProduct
-            Inventory.TempProduct.AssociatedParts.Add(newPart);
+            AssociatedParts.Add(newPart);
         }
-        public bool removeAssociatedPart(int partIDNum) 
+        public bool removeAssociatedPart(int partIndex) 
         {
-            if (Inventory.TempProduct.AssociatedParts.Remove(Inventory.TempProduct.AssociatedParts[partIDNum]))
+            if (AssociatedParts.Remove(AssociatedParts[partIndex]))
             {
                 return true;
             } else {
@@ -53,10 +50,8 @@ namespace AkariBowens_InventorySystem
             Console.Write("Found " + foundPart);
             return foundPart;
         }
-        public void ResetProduct(Product currentProduct)
-        {
-            currentProduct = new Product(0, "", 0, 0, 0, 0);
-        }
+
+        
       
     }
 }

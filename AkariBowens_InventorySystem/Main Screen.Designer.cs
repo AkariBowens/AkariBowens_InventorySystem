@@ -51,10 +51,10 @@
             // partsDeleteButton
             // 
             this.partsDeleteButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.partsDeleteButton.Location = new System.Drawing.Point(437, 312);
-            this.partsDeleteButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.partsDeleteButton.Location = new System.Drawing.Point(435, 315);
+            this.partsDeleteButton.Margin = new System.Windows.Forms.Padding(2);
             this.partsDeleteButton.Name = "partsDeleteButton";
-            this.partsDeleteButton.Size = new System.Drawing.Size(76, 39);
+            this.partsDeleteButton.Size = new System.Drawing.Size(75, 35);
             this.partsDeleteButton.TabIndex = 8;
             this.partsDeleteButton.Text = "Delete";
             this.partsDeleteButton.UseVisualStyleBackColor = true;
@@ -63,10 +63,10 @@
             // partsModifyButton
             // 
             this.partsModifyButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.partsModifyButton.Location = new System.Drawing.Point(332, 312);
-            this.partsModifyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.partsModifyButton.Location = new System.Drawing.Point(335, 315);
+            this.partsModifyButton.Margin = new System.Windows.Forms.Padding(2);
             this.partsModifyButton.Name = "partsModifyButton";
-            this.partsModifyButton.Size = new System.Drawing.Size(76, 39);
+            this.partsModifyButton.Size = new System.Drawing.Size(75, 35);
             this.partsModifyButton.TabIndex = 7;
             this.partsModifyButton.Text = "Modify";
             this.partsModifyButton.UseVisualStyleBackColor = true;
@@ -75,10 +75,10 @@
             // partsAddButton
             // 
             this.partsAddButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.partsAddButton.Location = new System.Drawing.Point(227, 312);
-            this.partsAddButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.partsAddButton.Location = new System.Drawing.Point(235, 315);
+            this.partsAddButton.Margin = new System.Windows.Forms.Padding(2);
             this.partsAddButton.Name = "partsAddButton";
-            this.partsAddButton.Size = new System.Drawing.Size(76, 39);
+            this.partsAddButton.Size = new System.Drawing.Size(75, 35);
             this.partsAddButton.TabIndex = 6;
             this.partsAddButton.Text = "Add";
             this.partsAddButton.UseVisualStyleBackColor = true;
@@ -87,10 +87,10 @@
             // productsDeleteButton
             // 
             this.productsDeleteButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productsDeleteButton.Location = new System.Drawing.Point(954, 312);
-            this.productsDeleteButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.productsDeleteButton.Location = new System.Drawing.Point(945, 315);
+            this.productsDeleteButton.Margin = new System.Windows.Forms.Padding(2);
             this.productsDeleteButton.Name = "productsDeleteButton";
-            this.productsDeleteButton.Size = new System.Drawing.Size(76, 39);
+            this.productsDeleteButton.Size = new System.Drawing.Size(75, 35);
             this.productsDeleteButton.TabIndex = 14;
             this.productsDeleteButton.Text = "Delete";
             this.productsDeleteButton.UseVisualStyleBackColor = true;
@@ -99,10 +99,10 @@
             // productsModifyButton
             // 
             this.productsModifyButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productsModifyButton.Location = new System.Drawing.Point(849, 312);
-            this.productsModifyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.productsModifyButton.Location = new System.Drawing.Point(845, 315);
+            this.productsModifyButton.Margin = new System.Windows.Forms.Padding(2);
             this.productsModifyButton.Name = "productsModifyButton";
-            this.productsModifyButton.Size = new System.Drawing.Size(76, 39);
+            this.productsModifyButton.Size = new System.Drawing.Size(75, 35);
             this.productsModifyButton.TabIndex = 13;
             this.productsModifyButton.Text = "Modify";
             this.productsModifyButton.UseVisualStyleBackColor = true;
@@ -111,10 +111,10 @@
             // productsAddButton
             // 
             this.productsAddButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productsAddButton.Location = new System.Drawing.Point(744, 312);
-            this.productsAddButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.productsAddButton.Location = new System.Drawing.Point(745, 315);
+            this.productsAddButton.Margin = new System.Windows.Forms.Padding(2);
             this.productsAddButton.Name = "productsAddButton";
-            this.productsAddButton.Size = new System.Drawing.Size(76, 39);
+            this.productsAddButton.Size = new System.Drawing.Size(75, 35);
             this.productsAddButton.TabIndex = 12;
             this.productsAddButton.Text = "Add";
             this.productsAddButton.UseVisualStyleBackColor = true;
@@ -123,8 +123,8 @@
             // partsSearchButton
             // 
             this.partsSearchButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.partsSearchButton.Location = new System.Drawing.Point(441, 99);
-            this.partsSearchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.partsSearchButton.Location = new System.Drawing.Point(440, 100);
+            this.partsSearchButton.Margin = new System.Windows.Forms.Padding(2);
             this.partsSearchButton.Name = "partsSearchButton";
             this.partsSearchButton.Size = new System.Drawing.Size(63, 31);
             this.partsSearchButton.TabIndex = 15;
@@ -134,8 +134,8 @@
             // productsSearchButton
             // 
             this.productsSearchButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productsSearchButton.Location = new System.Drawing.Point(957, 99);
-            this.productsSearchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.productsSearchButton.Location = new System.Drawing.Point(950, 100);
+            this.productsSearchButton.Margin = new System.Windows.Forms.Padding(2);
             this.productsSearchButton.Name = "productsSearchButton";
             this.productsSearchButton.Size = new System.Drawing.Size(63, 31);
             this.productsSearchButton.TabIndex = 16;
@@ -148,9 +148,9 @@
             this.applicationExitButton.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.applicationExitButton.ForeColor = System.Drawing.Color.Red;
             this.applicationExitButton.Location = new System.Drawing.Point(922, 383);
-            this.applicationExitButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.applicationExitButton.Margin = new System.Windows.Forms.Padding(2);
             this.applicationExitButton.Name = "applicationExitButton";
-            this.applicationExitButton.Size = new System.Drawing.Size(81, 38);
+            this.applicationExitButton.Size = new System.Drawing.Size(75, 35);
             this.applicationExitButton.TabIndex = 17;
             this.applicationExitButton.Text = "Exit";
             this.applicationExitButton.UseVisualStyleBackColor = true;
@@ -158,8 +158,8 @@
             // 
             // productsSearchBar
             // 
-            this.productsSearchBar.Location = new System.Drawing.Point(692, 107);
-            this.productsSearchBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.productsSearchBar.Location = new System.Drawing.Point(685, 105);
+            this.productsSearchBar.Margin = new System.Windows.Forms.Padding(2);
             this.productsSearchBar.Name = "productsSearchBar";
             this.productsSearchBar.Size = new System.Drawing.Size(252, 20);
             this.productsSearchBar.TabIndex = 20;
@@ -167,8 +167,8 @@
             // 
             // partsSearchBar
             // 
-            this.partsSearchBar.Location = new System.Drawing.Point(177, 107);
-            this.partsSearchBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.partsSearchBar.Location = new System.Drawing.Point(175, 105);
+            this.partsSearchBar.Margin = new System.Windows.Forms.Padding(2);
             this.partsSearchBar.Name = "partsSearchBar";
             this.partsSearchBar.Size = new System.Drawing.Size(252, 20);
             this.partsSearchBar.TabIndex = 21;
@@ -179,7 +179,7 @@
             this.partsListLabel.AutoSize = true;
             this.partsListLabel.Font = new System.Drawing.Font("Gadugi", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.partsListLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.partsListLabel.Location = new System.Drawing.Point(66, 102);
+            this.partsListLabel.Location = new System.Drawing.Point(65, 100);
             this.partsListLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.partsListLabel.Name = "partsListLabel";
             this.partsListLabel.Size = new System.Drawing.Size(61, 25);
@@ -191,7 +191,7 @@
             this.productsListLabel.AutoSize = true;
             this.productsListLabel.Font = new System.Drawing.Font("Gadugi", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productsListLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.productsListLabel.Location = new System.Drawing.Point(583, 102);
+            this.productsListLabel.Location = new System.Drawing.Point(575, 100);
             this.productsListLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.productsListLabel.Name = "productsListLabel";
             this.productsListLabel.Size = new System.Drawing.Size(99, 25);
@@ -212,12 +212,12 @@
             // partsGridView
             // 
             this.partsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.partsGridView.Location = new System.Drawing.Point(59, 146);
-            this.partsGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.partsGridView.Location = new System.Drawing.Point(60, 145);
+            this.partsGridView.Margin = new System.Windows.Forms.Padding(2);
             this.partsGridView.Name = "partsGridView";
             this.partsGridView.RowHeadersWidth = 62;
             this.partsGridView.RowTemplate.Height = 28;
-            this.partsGridView.Size = new System.Drawing.Size(455, 146);
+            this.partsGridView.Size = new System.Drawing.Size(455, 150);
             this.partsGridView.TabIndex = 25;
             this.partsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.partsGridView_CellContentClick);
             this.partsGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.partsDGVBindComplete);
@@ -225,12 +225,12 @@
             // productsGridView
             // 
             this.productsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.productsGridView.Location = new System.Drawing.Point(573, 146);
-            this.productsGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.productsGridView.Location = new System.Drawing.Point(570, 145);
+            this.productsGridView.Margin = new System.Windows.Forms.Padding(2);
             this.productsGridView.Name = "productsGridView";
             this.productsGridView.RowHeadersWidth = 62;
             this.productsGridView.RowTemplate.Height = 28;
-            this.productsGridView.Size = new System.Drawing.Size(455, 146);
+            this.productsGridView.Size = new System.Drawing.Size(455, 150);
             this.productsGridView.TabIndex = 26;
             this.productsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productsGridView_CellContentClick);
             this.productsGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.productsPartsDGVBindingComplete);
@@ -256,7 +256,7 @@
             this.Controls.Add(this.partsDeleteButton);
             this.Controls.Add(this.partsModifyButton);
             this.Controls.Add(this.partsAddButton);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "mainScreen";
             this.Text = "Main Screen";
             this.Load += new System.EventHandler(this.mainScreen_Load);

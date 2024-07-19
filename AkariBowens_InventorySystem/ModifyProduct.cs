@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -75,11 +76,11 @@ namespace AkariBowens_InventorySystem
 
             // ----- ----- Prefills textboxes ----- ----- //
             idTextBox.Enabled = false;
-            idTextBox.Text = Inventory.TempProduct.ProductID.ToString();
 
+            idTextBox.Text = Inventory.TempProduct.ProductID.ToString();
             nameTextBox.Text = Inventory.TempProduct.Name.ToString();
             InventoryTextBox.Text = Inventory.TempProduct.InStock.ToString();
-            priceCostTextBox.Text = Inventory.TempProduct.Price.ToString();
+            priceTextBox.Text = Inventory.TempProduct.Price.ToString();
             maxTextBox.Text = Inventory.TempProduct.Max.ToString();
             minTextBox.Text = Inventory.TempProduct.Min.ToString();
 
@@ -90,7 +91,6 @@ namespace AkariBowens_InventorySystem
             // Fills associatedParts on save and only if part is selected
             if (allPartsGridView.CurrentRow.Selected)
             {
-                // if associatedparts list is !empty and first add, clear it 
                 Part currentPart = Inventory.AllParts[allPartsGridView.CurrentRow.Index];
                 Inventory.TempProduct.addAssociatedPart(currentPart);
                 allPartsGridView.ClearSelection();
@@ -101,6 +101,7 @@ namespace AkariBowens_InventorySystem
         {
             if (assocPartsGridView.CurrentRow.Selected)
             {
+                // Part currentPart = Inventory.TempProduct.AssociatedParts[assocPartsGridView.CurrentRow.Index];
                 Inventory.TempProduct.removeAssociatedPart(assocPartsGridView.CurrentRow.Index);
                 allPartsGridView.ClearSelection();
             }
@@ -113,92 +114,146 @@ namespace AkariBowens_InventorySystem
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            // Saves edited product to inventory
-            // Copy data from temp to new object, clear temp, save new obj
-            int isValid = 0;
+                
+                int isValid = 0;
 
-            int addProductId;
-            if (int.TryParse(idTextBox.Text, out addProductId))
+                string addProductName = nameTextBox.Text;
+
+                // Checks if inventory input is an int
+                int addProductInv;
+                if (int.TryParse(InventoryTextBox.Text, out addProductInv))
+                {
+                    Console.WriteLine("Converting " + addProductInv + " ..." + "\n");
+                    isValid++;
+                    InventoryTextBox.BackColor = Color.White;
+                }
+                else
+                {
+                    // Change these to message boxes on product and part
+                    Console.WriteLine("Inventory " + InventoryTextBox.Text + " not an integer" + "\n");
+
+                    MessageBox.Show("Inventory: '" + InventoryTextBox.Text + "' must be a number!");
+                    InventoryTextBox.BackColor = Color.Red;
+                }
+
+                // Checks if partPrice input is a decimal
+                double addProductPrice;
+                if (double.TryParse(priceTextBox.Text, out addProductPrice))
+                {
+                    Console.WriteLine("Converting " + addProductPrice + "..." + "\n");
+                    isValid++;
+                    priceTextBox.BackColor = Color.White;
+                }
+                else
+                {
+                    // Change these to message boxes on product and part
+                    Console.WriteLine("Price " + priceTextBox.Text + " not a decimal" + "\n");
+
+                    MessageBox.Show("Price: '" + priceTextBox.Text + "' must be a decimal!");
+                    priceTextBox.BackColor = Color.Red;
+                }
+
+                // Make sure part is an int
+                int addProductMin;
+
+                if (int.TryParse(minTextBox.Text, out addProductMin))
+                {
+                    Console.WriteLine("Converting " + addProductMin + " ..." + "\n");
+                    isValid++;
+                    minTextBox.BackColor = Color.White;
+                }
+                else
+                {
+                    // Change these to message boxes on product and part
+                    Console.WriteLine("Minimum " + minTextBox.Text + " not an int" + "\n");
+
+                    MessageBox.Show("Minimum: '" + minTextBox.Text + "' must be a number!");
+                    minTextBox.BackColor = Color.Red;
+                }
+
+                // Checks if partPrice input is an int
+                int addProductMax;
+                if (int.TryParse(maxTextBox.Text, out addProductMax))
+                {
+                    Console.WriteLine("Converting " + addProductMax + "..." + "\n");
+                    isValid++;
+                    maxTextBox.BackColor = Color.White;
+                }
+                else
+                {
+                    // Change these to message boxes on product and part
+                    Console.WriteLine("Maximum: " + maxTextBox.Text + " not an int" + "\n");
+
+                    MessageBox.Show("Maximum: '" + maxTextBox.Text + "' must be a number!");
+                    maxTextBox.BackColor = Color.Red;
+                }
+
+                if (addProductMin > addProductMax)
+                {
+                    isValid--;
+                    MessageBox.Show("Minimum must be less than Maximum.");
+                    maxTextBox.BackColor = Color.Tomato;
+                    minTextBox.BackColor = Color.Tomato;
+                }
+
+                if (addProductInv < addProductMin || addProductInv > addProductMax)
+                {
+                    isValid--;
+                    MessageBox.Show("Inventory must be within min/max range.");
+                    InventoryTextBox.BackColor = Color.Tomato;
+
+                }
+
+                //Initializes a new product instance with the above variables
+                Product NewProduct = new Product(Inventory.GlobalProductID++, addProductName, addProductInv, addProductPrice, addProductMin, addProductMax);
+
+                for (int i = 0; i < Inventory.TempProduct.AssociatedParts.Count; i++)
+                {
+                    NewProduct.AssociatedParts.Add(Inventory.TempProduct.AssociatedParts[i]);
+                }
+
+                if (isValid == 4)
+                {
+                    Console.WriteLine("Associated Parts: " + NewProduct.AssociatedParts.Count + "\n");
+                    int ProductIdx = Inventory.TempProductIndex;
+                    Inventory.UpdateProduct(ProductIdx, NewProduct);
+                    Close();
+                }
+      
+        
+        }
+
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+  
+            BindingList<Part> TempPartsList = new BindingList<Part>();
+            allPartsGridView.ClearSelection();
+            bool partFound = false;
+
+            // 
+            if (searchTextBox.Text != "")
             {
-                Console.WriteLine("Converting " + addProductId + " ...");
-                isValid++;
-            }
-            else
-            {
-                // Change these to message boxes on product and part
-                Console.WriteLine("Input " + idTextBox.Text + " not an int");
+                for (int i = 0; i < Inventory.AllParts.Count; i++)
+                {
+                    // Searches Names of Parts in AllParts
+                    if (Inventory.AllParts[i].Name.ToUpper().Contains(searchTextBox.Text.ToUpper()))
+                    {
+                        TempPartsList.Add(Inventory.AllParts[i]);
+                        partFound = true;
+                    }
+                }
+                if (partFound)
+                {
+                    allPartsGridView.DataSource = TempPartsList;
+                }
             }
 
-            string addProductName = nameTextBox.Text;
-            // Inventory.TempProduct.Name = addProductName;
-
-            // Checks if inventory input is an int
-            int addProductInv;
-            if (int.TryParse(InventoryTextBox.Text, out addProductInv))
+            // This part is annoying. It pops up at every option, create a while loop?
+            // if (!partFound && partsSearchBar.Text != "") 
+            if (!partFound)
             {
-                Console.WriteLine("Converting " + addProductInv + " ..." + "\n");
-                isValid++;
-            }
-            else
-            {
-                // Change these to message boxes on product and part
-                Console.WriteLine("Input " + InventoryTextBox.Text + " not an integer" + "\n");
-            }
-
-            // Checks if partPrice input is a decimal
-            double addProductPrice;
-            if (double.TryParse(priceCostTextBox.Text, out addProductPrice))
-            {
-                Console.WriteLine("Converting " + addProductPrice + "..." + "\n");
-                isValid++;
-            }
-            else
-            {
-                // Change these to message boxes on product and part
-                Console.WriteLine("Input " + priceCostTextBox.Text + " not a decimal" + "\n");
-            }
-
-            // Make sure part is an int
-            int addProductMin;
-            if (int.TryParse(minTextBox.Text, out addProductMin))
-            {
-                Console.WriteLine("Converting " + addProductMin + " ..." + "\n");
-                isValid++;
-            }
-            else
-            {
-                // Change these to message boxes on product and part
-                Console.WriteLine("Input " + minTextBox.Text + " not an int" + "\n");
-            }
-
-            // Checks if partPrice input is an int
-            int addProductMax;
-            if (int.TryParse(maxTextBox.Text, out addProductMax))
-            {
-                Console.WriteLine("Converting " + addProductMax + "..." + "\n");
-                isValid++;
-            }
-            else
-            {
-                // Change these to message boxes on product and part
-                Console.WriteLine("Input " + maxTextBox.Text + " not an int" + "\n");
-            }
-
-            //Since we are saving a product to a product, we are savinging the values to the existing product
-            Product NewProduct = new Product(addProductId, addProductName, addProductInv, addProductPrice, addProductMin, addProductMax);
-            NewProduct.AssociatedParts = Inventory.TempProduct.AssociatedParts;
-
-            if (isValid == 5)
-            {
-                Console.WriteLine(isValid + "\n");
-                Console.WriteLine("Associated Parts: " + NewProduct.AssociatedParts.Count + "\n");
-                Console.WriteLine(Inventory.TempProduct + "\n");
-
-                //What if instead of testing all, just test the ones that are different
-                int ProductIdx = Inventory.TempProduct.ProdIdx;
-                Inventory.UpdateProduct(ProductIdx, NewProduct);
-             
-                Close();
+                MessageBox.Show("Nothing Found.");
+                allPartsGridView.DataSource = Inventory.AllParts;
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,14 +12,22 @@ namespace AkariBowens_InventorySystem
 
     {
         // Attributes //
+        private BindingList<Product> _allProducts = new BindingList<Product>();
         public static BindingList<Product> AllProducts = new BindingList<Product>();
+
+        private static BindingList<Part> _allParts = new BindingList<Part>();
         public static BindingList<Part> AllParts = new BindingList<Part>();
 
         public static Part SelectedPart { get; set; }
         public static int SelectedPartIndex { get; set; }
-        
-        public static Product TempProduct { get; set; }    
 
+        public static Product TempProduct { get; set; }
+        public static int TempProductIndex { get; set; }
+
+        public static int GlobalProductID { get; set; } = 1000;
+        public static int GlobalPartID {get; set;} = 100;
+        
+        
         // Methods // 
 
         // ----- Product Methods ----- //
@@ -26,6 +35,7 @@ namespace AkariBowens_InventorySystem
         // Adds new product to AllProducts list
         public static void addProduct(Product insertedProduct) 
         { 
+            // This should increment product id
             AllProducts.Add(insertedProduct);
         }
 
@@ -46,10 +56,10 @@ namespace AkariBowens_InventorySystem
         public static void UpdateProduct(int productIdx, Product TempProduct) 
         {
             // Gets item in AllProducts, updates on contrasting values in same property, updates, and saves
-            
+
             // Sets product to be changed
             Product productToChange = AllProducts[productIdx];
-            Console.WriteLine("Associated Parts:" + TempProduct.AssociatedParts.Count);
+            Console.WriteLine("Associated Parts: " + TempProduct.AssociatedParts.Count);
             
 
             // If name taken...?
@@ -84,7 +94,7 @@ namespace AkariBowens_InventorySystem
             }
 
             
-            Console.WriteLine("Associated Parts:" + AllProducts[productIdx].AssociatedParts.Count);
+            Console.WriteLine("Associated Parts: " + AllProducts[productIdx].AssociatedParts.Count + " in UpdateProduct");
             AllProducts.ResetBindings();    
         }
 
@@ -115,14 +125,23 @@ namespace AkariBowens_InventorySystem
         // Adds new Part to AllParts list
         public static void addPart(Part insertedPart) 
         {
-            // do validations here -- i.e, (Min < Max)
-            // if (insertedPart.Min > insertedPart.Max) do something
+            // This should increment part id
             AllParts.Add(insertedPart);
         }
 
         // Removes part from AllParts
-         public static bool deletePart(Part selectedPart) 
+        public static bool deletePart(Part selectedPart) 
          {
+            // check if selectedPart is in AllProducts[i].AssociatedParts[j] or AllProducts[i].AssociatedParts.Contains(SelectedPart)
+            // retrun false if part is associated w/ a product
+            for (int i = 0; i < AllProducts.Count; i++)
+            {
+                if (AllProducts[i].AssociatedParts.Contains(selectedPart))
+                {
+                    return false;
+                }
+                // return false;
+            }
             AllParts.Remove(selectedPart);
             return true;
          }
@@ -133,94 +152,104 @@ namespace AkariBowens_InventorySystem
             Part foundPart = AllParts[partIndex];
 
             Console.Write("Found " + AllParts[partIndex] + "\n");
-            return foundPart;
-               
+            return foundPart; 
         }
 
-        // ----- Add from Main Screen partsSearchBar----- //
         // Updates existing part in AllParts list
-        public static void updatePart(int partIndex, Part currentPart) 
+        public static void UpdatePart(int partIndex, Part currentPart)
         {
-            // check which field is different, then..
-            // lookup part, return it, fill modify page
-            // Part partToUpdate;
-
-            if (currentPart is InHouse)
-            {
+                
+            Console.WriteLine("Part index: " + partIndex);
+            if (currentPart is InHouse && AllParts[partIndex] is InHouse) 
+            { 
                 InHouse savedPart = (InHouse)currentPart;
                 InHouse partToUpdate = (InHouse)AllParts[partIndex];
-                if (partToUpdate.PartID != currentPart.PartID)
-                {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.PartID + " to " + savedPart.PartID + "\n");
-                    partToUpdate.PartID = savedPart.PartID;
-                }
+
+                // Reconfigure this later
+                
                 if (partToUpdate.Name != savedPart.Name)
                 {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.Name + " to " + savedPart.Name + "\n");
+                    Console.WriteLine("Changing PartName " + partToUpdate.Name + " to " + savedPart.Name + "\n");
                     partToUpdate.Name = savedPart.Name;
                 }
                 if (partToUpdate.InStock != savedPart.InStock)
                 {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.InStock + " to " + savedPart.InStock + "\n");
+                    Console.WriteLine("Changing PartInStock " + partToUpdate.InStock + " to " + savedPart.InStock + "\n");
                     partToUpdate.InStock = savedPart.InStock;
                 }
                 if (partToUpdate.Price != savedPart.Price)
                 {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.Price + " to " + savedPart.Price + "\n");
+                    Console.WriteLine("Changing PartPrice " + partToUpdate.Price + " to " + savedPart.Price + "\n");
                     partToUpdate.Price = savedPart.Price;
                 }
 
                 if (partToUpdate.Min != savedPart.Min)
                 {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.Min + " to " + savedPart.Min + "\n");
+                    Console.WriteLine("Changing PartMin " + partToUpdate.Min + " to " + savedPart.Min + "\n");
                     partToUpdate.Min = savedPart.Min;
                 }
                 if (partToUpdate.Max != savedPart.Max)
                 {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.Max + " to " + savedPart.Max + "\n");
+                    Console.WriteLine("Changing PartMax " + partToUpdate.Max + " to " + savedPart.Max + "\n");
                     partToUpdate.Max = savedPart.Max;
                 }
 
                 if (partToUpdate.InHouseID != savedPart.InHouseID)
                 {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.InHouseID + " to " + savedPart.InHouseID + "\n");
+                    Console.WriteLine("Changing PartInHouseID " + partToUpdate.InHouseID + " to " + savedPart.InHouseID + "\n");
                     partToUpdate.InHouseID = savedPart.InHouseID;
                 }
+
+                
+
             }
-            
-            if (currentPart is Outsourced)
+            else if (currentPart is InHouse && AllParts[partIndex] is Outsourced)
+            {
+                InHouse savedPart = (InHouse)currentPart;
+               
+                InHouse NewPart = new InHouse(AllParts[partIndex].PartID, savedPart.Name, savedPart.InStock, (double)savedPart.Price, savedPart.Min, savedPart.Max, savedPart.InHouseID);
+                
+                // Removes part at partIndex
+                Console.WriteLine("Remove part at index " + partIndex);
+                AllParts.RemoveAt(partIndex);
+
+                //Adds part at partIndex
+                Console.WriteLine("Insert new part at index " + partIndex);
+                AllParts.Insert(partIndex, NewPart);
+
+               
+
+            }
+
+            else if (currentPart is Outsourced && AllParts[partIndex] is Outsourced)
             {
                 Outsourced savedPart = (Outsourced)currentPart;
                 Outsourced partToUpdate = (Outsourced)AllParts[partIndex];
-                if (partToUpdate.PartID != currentPart.PartID)
-                {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.PartID + " to " + savedPart.PartID + "\n");
-                    partToUpdate.PartID = savedPart.PartID;
-                }
+
                 if (partToUpdate.Name != savedPart.Name)
                 {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.Name + " to " + savedPart.Name + "\n");
+                    Console.WriteLine("Changing PartName " + partToUpdate.Name + " to " + savedPart.Name + "\n");
                     partToUpdate.Name = savedPart.Name;
                 }
                 if (partToUpdate.InStock != savedPart.InStock)
                 {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.InStock + " to " + savedPart.InStock + "\n");
+                    Console.WriteLine("Changing PartInStock " + partToUpdate.InStock + " to " + savedPart.InStock + "\n");
                     partToUpdate.InStock = savedPart.InStock;
                 }
                 if (partToUpdate.Price != savedPart.Price)
                 {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.Price + " to " + savedPart.Price + "\n");
+                    Console.WriteLine("Changing PartPrice " + partToUpdate.Price + " to " + savedPart.Price + "\n");
                     partToUpdate.Price = savedPart.Price;
                 }
 
                 if (partToUpdate.Min != savedPart.Min)
                 {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.Min + " to " + savedPart.Min + "\n");
+                    Console.WriteLine("Changing PartMin " + partToUpdate.Min + " to " + savedPart.Min + "\n");
                     partToUpdate.Min = savedPart.Min;
                 }
                 if (partToUpdate.Max != savedPart.Max)
                 {
-                    Console.WriteLine("Changing ProductName " + partToUpdate.Max + " to " + savedPart.Max + "\n");
+                    Console.WriteLine("Changing PartMax " + partToUpdate.Max + " to " + savedPart.Max + "\n");
                     partToUpdate.Max = savedPart.Max;
                 }
 
@@ -229,29 +258,46 @@ namespace AkariBowens_InventorySystem
                     Console.WriteLine("Changing ProductName " + partToUpdate.Company + " to " + savedPart.Company + "\n");
                     partToUpdate.Company = savedPart.Company;
                 }
-            }
-            // Test and compare
 
-            // if (partToUpdate != currentPart)
+              
+            }
+
+            else if(currentPart is Outsourced && AllParts[partIndex] is InHouse)
+            {
+                Outsourced savedPart = (Outsourced)currentPart;
+                
+                Outsourced NewPart = new Outsourced(AllParts[partIndex].PartID, savedPart.Name, savedPart.InStock, (double)savedPart.Price, savedPart.Min, savedPart.Max, savedPart.Company);
+                
+                // Removes part at partIndex
+                Console.WriteLine("Remove part at index " + partIndex);
+                AllParts.RemoveAt(partIndex);
+
+                //Adds part at partIndex
+                Console.WriteLine("Insert new part at index " + partIndex);
+
+                AllParts.Insert(partIndex, NewPart);
+
+                
+            }
+            // Refreshes AllParts list with updated part
+            AllParts.ResetBindings();
+
             return;
         }
 
         static Inventory()
         {
-            // maybe create the IDnum algo in here and pass it to each newly added Part/Product
             // Adds default parts to AllProducts
-            AllProducts.Add(new Product(1, "testProduct1", 1, 210.99, 0, 1));
-            AllProducts.Add(new Product(2, "testProduct2", 1, 211.99, 0, 1));
-            AllProducts.Add(new Product(3, "testProduct3", 1, 212.99, 0, 1));
+            AllProducts.Add(new Product(GlobalProductID++, "testProduct1", 4, 210.99, 0, 5));
+            AllProducts.Add(new Product(GlobalProductID++, "testProduct2", 1, 211.99, 0, 2));
+            AllProducts.Add(new Product(GlobalProductID++, "testProduct3", 1, 212.99, 0, 3));
 
             // Adds default parts to AllParts
-            AllParts.Add(new InHouse(4, "testPart4", 1, 213.99, 0, 1, 102256));
-            AllParts.Add(new Outsourced(5, "testPart5", 1, 214.99, 0, 1, "DirectLine Inc."));
-            AllParts.Add(new InHouse(6, "testPart6", 1, 215.99, 0, 1, 1065578));
+            AllParts.Add(new InHouse(GlobalPartID++, "testPart4", 3, 213.99, 0, 8, 102256));
+            AllParts.Add(new Outsourced(GlobalPartID++, "testPart5", 1, 214.99, 0, 3, "DirectLine Inc."));
+            AllParts.Add(new InHouse(GlobalPartID++, "testPart6", 2, 215.99, 0, 6, 1065578));
 
         }
     };
-
-    //
     
 }

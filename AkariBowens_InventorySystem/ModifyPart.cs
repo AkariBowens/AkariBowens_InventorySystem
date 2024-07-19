@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AkariBowens_InventorySystem
@@ -14,17 +15,19 @@ namespace AkariBowens_InventorySystem
 
         private void addPartCancel_Click(object sender, EventArgs e)
         {
-            // If fields are changed from Inventory.SelectedPart - "Are you sure?"
             Close();
         }
 
         private void ModifyPartScreen_Load(object sender, EventArgs e)
         {
 
-            // Disables ability to edit ID field
-            addPartSave.Enabled = false;
+            // Disable ability to edit ID field
+            // idTextBox.Enabled = false
+
+            // modifyPartSave.Enabled = false;
 
             // Pre-populate fields
+            idTextBox.Enabled = false;
             idTextBox.Text = Inventory.SelectedPart.PartID.ToString();
             nameTextBox.Text = Inventory.SelectedPart.Name.ToString();
             InventoryTextBox.Text = Inventory.SelectedPart.InStock.ToString();
@@ -54,25 +57,9 @@ namespace AkariBowens_InventorySystem
 
         private void addPartSave_Click(object sender, EventArgs e)
         {
-            // bool isValid = false;
-
-            // Validation code here
-            // -- do the regular validation, then do the individual ones from 
-
+            
+            // ----- Do the changing of types ----- //
             int isValid = 0;
-
-            int addPartId;
-            if (int.TryParse(idTextBox.Text, out addPartId))
-            {
-                Console.WriteLine("Converting " + addPartId + " ...");
-                isValid++;
-            }
-            else
-            {
-                // Change these to message boxes on product and part
-                Console.WriteLine("Input " + idTextBox.Text + " not an int");
-                // Add code that highlights incorrectbox
-            }
 
             string addPartName = nameTextBox.Text;
             //if (nameTextBox.)
@@ -87,6 +74,7 @@ namespace AkariBowens_InventorySystem
             {
                 // Change these to message boxes on product and part
                 Console.WriteLine("Input " + InventoryTextBox.Text + " not an integer\n");
+                InventoryTextBox.BackColor = Color.Tomato;
             }
 
             double addPartPrice;
@@ -99,6 +87,7 @@ namespace AkariBowens_InventorySystem
             {
                 // Change these to message boxes on product and part
                 Console.WriteLine("Input " + priceCostTextBox.Text + " not a decimal\n");
+                priceCostTextBox.BackColor = Color.Tomato;
             }
 
             // Make sure part is an int
@@ -112,6 +101,7 @@ namespace AkariBowens_InventorySystem
             {
                 // Change these to message boxes on product and part
                 Console.WriteLine("Input " + minTextBox.Text + " not an int\n");
+                minTextBox.BackColor = Color.Tomato;
             }
 
             // Checks if partPrice input is an int
@@ -125,49 +115,59 @@ namespace AkariBowens_InventorySystem
             {
                 // Change these to message boxes on product and part
                 Console.WriteLine("Input " + maxTextBox.Text + " not an int\n");
+                maxTextBox.BackColor = Color.Tomato;
             }
 
-            int addPartMachineID = 0;
-            string addPartCompanyName = " ";
+            if (addPartMin > addPartMax)
+            {
+                isValid--;
+                MessageBox.Show("Minimum must be less than Maximum.");
+                maxTextBox.BackColor = Color.Tomato;
+                minTextBox.BackColor = Color.Tomato;
+            }
 
-
-            // if inhouse/outsourced checked -- cast part as.. -- then from there, grab the value in the varPartBox, validate it, and save declare part 
-            // add this part in the if isValid
-            // Finish tomorrow - clean up if conditions
-            if (isValid == 5)
+            if (addPartInv < addPartMin || addPartInv > addPartMax)
+            {
+                isValid--;
+                MessageBox.Show("Inventory must be within min/max range.");
+                InventoryTextBox.BackColor = Color.Tomato;   
+            }
+ 
+            // Add 
+            if (isValid == 4)
             {
                 if (varInputTextBox.Text != null && varInputTextBox.Text != "")
                 {
+                    // if checked == true && current Part == savedPart }else{ make  new part, and run addPart to change the type
                     if (inHouseRadioButton.Checked == true)
                     {
+
+                        int addPartMachineID;
                         if (int.TryParse(varInputTextBox.Text, out addPartMachineID))
                         {
                             Console.WriteLine("Converting " + varInputTextBox.Text + "...\n");
-                            InHouse NewPart = (InHouse)Inventory.SelectedPart;
-                            NewPart.InHouseID = addPartMachineID;
-
-                            Inventory.updatePart(Inventory.SelectedPartIndex, NewPart);
+                            InHouse NewPart = new InHouse(Inventory.GlobalPartID++, addPartName,addPartInv,addPartPrice, addPartMin, addPartMax, addPartMachineID);
+                            
+                            Inventory.UpdatePart(Inventory.SelectedPartIndex, NewPart);
+                            Close();
                         }
                         else
                         {
                             // Change these to message boxes on product and part
                             Console.WriteLine("Input " + varInputTextBox.Text + " not an int\n");
+                            varInputTextBox.BackColor = Color.Red;
                         }
-
-                    } else if (outsourcedRadioButton.Checked == true)
+                    } 
+                    
+                    if (outsourcedRadioButton.Checked == true)
                     {
-
-                       Outsourced NewPart = (Outsourced)Inventory.SelectedPart; 
-                       addPartCompanyName = varInputTextBox.Text;
-                       NewPart.Company = addPartCompanyName;
-                       
-                       Inventory.updatePart(Inventory.SelectedPartIndex, NewPart);
-
+                        string addPartCompanyName = varInputTextBox.Text;
+                        Outsourced NewPart = new Outsourced(Inventory.GlobalPartID++, addPartName, addPartInv, addPartPrice, addPartMin, addPartMax, addPartCompanyName);
+                        Inventory.UpdatePart(Inventory.SelectedPartIndex, NewPart);
+                        Close();
                     }
-
-                    addPartSave.Enabled = true;
+                    // modifyPartSave.Enabled = true;
                 }  
-                Close();
             } 
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,6 @@ namespace AkariBowens_InventorySystem
     internal abstract class Part
     {
         // Attributes
-        // public int PartID;
         public int PartID { get; set; }
 
         // public string Name;
@@ -27,18 +27,19 @@ namespace AkariBowens_InventorySystem
         public int Max { get; set; }
         // public int Min;
         public int Min { get; set; }
-        
+
         // Part constructor
-        public Part(int partIDnum, string partName, int partInStock, double partPrice, int partMin, int partMax)
+        public Part(int partIDnum, string partName, int partInStock, double partPrice , int partMin, int partMax)
         {
+            // Plan is to get this from whichever part 
             PartID = partIDnum;
             Name = partName;
             InStock = partInStock;
             // to decimal
-            Price = (decimal)partPrice;
+            Price = Math.Round((decimal)partPrice, 2);
             Min = partMin;
             Max = partMax;
-   
+           
             Console.WriteLine("Storing new product called " + partName + ".\n");
         }
     }
