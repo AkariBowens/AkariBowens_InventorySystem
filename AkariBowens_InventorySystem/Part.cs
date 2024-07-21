@@ -17,11 +17,11 @@ namespace AkariBowens_InventorySystem
         // public string Name;
         public string Name { get; set; }
 
-        // public int InStock;
-        public int InStock { get; set; }
-
         // public decimal Price
         public decimal Price { get; set; }
+
+        // public int InStock;
+        public int InStock { get; set; }
 
         // public int Max;
         public int Max { get; set; }
@@ -29,18 +29,16 @@ namespace AkariBowens_InventorySystem
         public int Min { get; set; }
 
         // Part constructor
-        public Part(int partIDnum, string partName, int partInStock, double partPrice , int partMin, int partMax)
+        public Part(int partIDnum, string partName, int partsInStock, double partPrice , int partMin, int partMax)
         {
-            // Plan is to get this from whichever part 
             PartID = partIDnum;
             Name = partName;
-            InStock = partInStock;
-            // to decimal
+            InStock = partsInStock;
+            
+            // Formats partPrice to $XXX.XX
             Price = Math.Round((decimal)partPrice, 2);
             Min = partMin;
             Max = partMax;
-           
-            Console.WriteLine("Storing new product called " + partName + ".\n");
         }
     }
 

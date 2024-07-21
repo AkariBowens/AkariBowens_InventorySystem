@@ -35,8 +35,8 @@ namespace AkariBowens_InventorySystem
         // Adds new product to AllProducts list
         public static void addProduct(Product insertedProduct) 
         { 
-            // This should increment product id
             AllProducts.Add(insertedProduct);
+            Console.WriteLine("Storing new product called " + insertedProduct.Name + ".\n");
         }
 
         // Removes product from AllProducts
@@ -49,74 +49,60 @@ namespace AkariBowens_InventorySystem
         public static Product LookupProduct(int productIndex) 
         {
             Product foundProduct = AllProducts[productIndex];
-            Console.Write("Found " +  AllProducts[productIndex] + "\n");
             return foundProduct;
         }
 
-        public static void UpdateProduct(int productIdx, Product TempProduct) 
+        public static void UpdateProduct(int productIdx, Product OriginalProduct) 
         {
-            // Gets item in AllProducts, updates on contrasting values in same property, updates, and saves
+            // Gets item in AllProducts and updates item in AllParts on contrasting property values
 
             // Sets product to be changed
             Product productToChange = AllProducts[productIdx];
-            Console.WriteLine("Associated Parts: " + TempProduct.AssociatedParts.Count);
             
-
-            // If name taken...?
-            if (productToChange.Name != TempProduct.Name)
+            if (productToChange.Name != OriginalProduct.Name)
             {
-                Console.WriteLine("Changing ProductName " + productToChange.Name + " to " + TempProduct.Name + "\n");
-                productToChange.Name = TempProduct.Name;
+                Console.WriteLine("Changing ProductName " + productToChange.Name + " to " + OriginalProduct.Name + "\n");
+                productToChange.Name = OriginalProduct.Name;
             }
 
-            if (productToChange.Price != TempProduct.Price)
+            if (productToChange.Price != OriginalProduct.Price)
             {
-                Console.WriteLine("Changing ProductPrice " + productToChange.Price + " to " + TempProduct.Price + "\n");
-                productToChange.Price = TempProduct.Price;
+                Console.WriteLine("Changing ProductPrice " + productToChange.Price + " to " + OriginalProduct.Price + "\n");
+                productToChange.Price = OriginalProduct.Price;
             }
 
-            if (productToChange.InStock != TempProduct.InStock)
+            if (productToChange.InStock != OriginalProduct.InStock)
             {
-                Console.WriteLine("Changing ProductInStock " + productToChange.InStock + " to " + TempProduct.InStock + "\n");
-                productToChange.InStock = TempProduct.InStock;
+                Console.WriteLine("Changing ProductInStock " + productToChange.InStock + " to " + OriginalProduct.InStock + "\n");
+                productToChange.InStock = OriginalProduct.InStock;
             }
 
-            if (productToChange.Min != TempProduct.Min)
+            if (productToChange.Min != OriginalProduct.Min)
             {
-                Console.WriteLine("Changing ProductMin " + productToChange.Min + " to " + TempProduct.Min + "\n");
-                productToChange.Min = TempProduct.Min;
+                Console.WriteLine("Changing ProductMin " + productToChange.Min + " to " + OriginalProduct.Min + "\n");
+                productToChange.Min = OriginalProduct.Min;
             }
 
-            if (productToChange.Max != TempProduct.Max)
+            if (productToChange.Max != OriginalProduct.Max)
             {
-                Console.WriteLine("Changing ProductMax " + productToChange.Max + " to " + TempProduct.Max + "\n");
-                productToChange.Max = TempProduct.Max;
+                Console.WriteLine("Changing ProductMax " + productToChange.Max + " to " + OriginalProduct.Max + "\n");
+                productToChange.Max = OriginalProduct.Max;
             }
-
             
+            // Copies AssociatedParts from OriginalProduct to productToChange
+            if (OriginalProduct.AssociatedParts.Count > 0)
+            {
+                productToChange.AssociatedParts.Clear();
+                for (int i = 0; i < OriginalProduct.AssociatedParts.Count; i++)
+                {
+                    productToChange.addAssociatedPart(OriginalProduct.AssociatedParts[i]);
+                    Console.WriteLine("Count: " + productToChange.AssociatedParts.Count);
+                }
+            }
             Console.WriteLine("Associated Parts: " + AllProducts[productIdx].AssociatedParts.Count + " in UpdateProduct");
             AllProducts.ResetBindings();    
         }
-
-        public static bool removeAssociatedPart(int associatedPart)
-        {
-            // Accessed through "Main Screen" or "Add Product"
-            if (associatedPart < 0 || associatedPart > AllParts.Count)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public static Part LookupAssociatedPart(int partIndex)
-        {
-            Part partAssociated = AllParts[partIndex];
-            
-            return partAssociated;
-        }
+      
 
         // -------------------------------------------------------//
 
@@ -125,22 +111,20 @@ namespace AkariBowens_InventorySystem
         // Adds new Part to AllParts list
         public static void addPart(Part insertedPart) 
         {
-            // This should increment part id
             AllParts.Add(insertedPart);
+            Console.WriteLine("Storing new part called " + insertedPart.Name + ".\n");
         }
 
         // Removes part from AllParts
         public static bool deletePart(Part selectedPart) 
          {
-            // check if selectedPart is in AllProducts[i].AssociatedParts[j] or AllProducts[i].AssociatedParts.Contains(SelectedPart)
-            // retrun false if part is associated w/ a product
+            
             for (int i = 0; i < AllProducts.Count; i++)
             {
                 if (AllProducts[i].AssociatedParts.Contains(selectedPart))
                 {
                     return false;
                 }
-                // return false;
             }
             AllParts.Remove(selectedPart);
             return true;
@@ -150,8 +134,6 @@ namespace AkariBowens_InventorySystem
         public static Part LookupPart(int partIndex) 
         {
             Part foundPart = AllParts[partIndex];
-
-            Console.Write("Found " + AllParts[partIndex] + "\n");
             return foundPart; 
         }
 
@@ -293,7 +275,7 @@ namespace AkariBowens_InventorySystem
             AllProducts.Add(new Product(GlobalProductID++, "testProduct3", 1, 212.99, 0, 3));
 
             // Adds default parts to AllParts
-            AllParts.Add(new InHouse(GlobalPartID++, "testPart4", 3, 213.99, 0, 8, 102256));
+            AllParts.Add(new InHouse(GlobalPartID++, "Right Angle Fitting", 3, 213.99, 0, 8, 102256));
             AllParts.Add(new Outsourced(GlobalPartID++, "testPart5", 1, 214.99, 0, 3, "DirectLine Inc."));
             AllParts.Add(new InHouse(GlobalPartID++, "testPart6", 2, 215.99, 0, 6, 1065578));
 

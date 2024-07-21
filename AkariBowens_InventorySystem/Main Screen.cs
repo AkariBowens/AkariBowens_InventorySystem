@@ -26,25 +26,22 @@ namespace AkariBowens_InventorySystem
 
         private void productsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-        
+            partsGridView.ClearSelection();
         }
         
-        // Change to products
         private void productsAddButton_Click(object sender, EventArgs e)
         {
             Inventory.TempProduct = new Product(0, " ", 0, 0, 0, 0);
             AddProductScreen newProductScreen = new AddProductScreen();
             newProductScreen.Show();
-           
         }
 
         private void partsModifyButton_Click(object sender, EventArgs e)
         {
-            // only executes if (currentRow.Selected) - prefill values on modify screen with selected
+            // Shows message box if notheing is selected
             if (partsGridView.CurrentRow == null || !partsGridView.CurrentRow.Selected)
             {
-                // Edit wording 
-                MessageBox.Show("There is nothing selected!", "Make a selection");
+                MessageBox.Show("There is nothing selected!", "Modify Part");
                 return;
             }
 
@@ -52,9 +49,9 @@ namespace AkariBowens_InventorySystem
 
             if (partsGridView.CurrentRow.Selected)
             {
+                // Gets index of selected part 
                 Inventory.SelectedPart = Inventory.LookupPart(partsGridView.CurrentRow.Index);
                 Inventory.SelectedPartIndex = Inventory.AllParts.IndexOf(Inventory.SelectedPart);
-                Console.WriteLine(Inventory.SelectedPartIndex);
             }
 
             ModifyPartScreen newModifyPartScreen = new ModifyPartScreen();
@@ -69,6 +66,8 @@ namespace AkariBowens_InventorySystem
                 MessageBox.Show("There is nothing selected!", "Make a selection");
                 return;
             }
+
+            // ----------- //
 
             if (productsGridView.CurrentRow.Selected)
             {
@@ -118,7 +117,7 @@ namespace AkariBowens_InventorySystem
 
         private void partsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Remake indexing
+            productsGridView.ClearSelection();
             Inventory.SelectedPartIndex = partsGridView.CurrentCell.RowIndex;
         }
 
@@ -131,17 +130,15 @@ namespace AkariBowens_InventorySystem
         private void partsDeleteButton_Click(object sender, EventArgs e)
         {
             
-            // Clear selection on products
+
             if (partsGridView.CurrentRow == null || !partsGridView.CurrentRow.Selected)
             {
-                // Edit wording 
-                MessageBox.Show("There is nothing selected!", "Make a selection");
+                MessageBox.Show("There is nothing selected!", "Part Delete");
                 return;
             }
             
             // Grabs index of selected item in partsDGV
             int Index = partsGridView.CurrentCell.RowIndex;
-            // -- maybe remake above indexing -- //
             
             DialogResult confirmationResult = MessageBox.Show("Are you sure you want to delete this?", "Delete Part", MessageBoxButtons.YesNo);
             // Removes indexed item from AllParts list
@@ -150,7 +147,7 @@ namespace AkariBowens_InventorySystem
             {
                 if (!Inventory.deletePart(Inventory.AllParts[Index]))
                 {
-                    MessageBox.Show("Part is associated with a Product");
+                    MessageBox.Show("Part is associated with a Product!");
                 }
             }
 
@@ -191,15 +188,11 @@ namespace AkariBowens_InventorySystem
 
         private void partsSearchBar_TextChanged(object sender, EventArgs e)
         {
-            // Search for character in list - continue within that list, so it never exits the loop
-            // option to filter by specific param. i.e. name, price, id
-            // have a reset button to return to original list
-
+            // Searches for a string in the names of AllParts
             BindingList<Part> TempPartsList = new BindingList<Part>();
             partsGridView.ClearSelection();
             bool partFound = false;
-
-            // 
+            
             if (partsSearchBar.Text != "")
             {
                 for (int i = 0; i < Inventory.AllParts.Count; i++)
@@ -211,54 +204,52 @@ namespace AkariBowens_InventorySystem
                         partFound = true;
                     }    
                 }
+
+                // When a part is found the source for partsDGV changes 
                 if (partFound)
                 {
                     partsGridView.DataSource = TempPartsList;
                 }
+                
             }
-
-            // This part is annoying. It pops up at every option, create a while loop?
-            // if (!partFound && partsSearchBar.Text != "") 
+             
+            // When a part is not found 
             if (!partFound)
             {
-                MessageBox.Show("Nothing Found.");
-                partsGridView.DataSource = Inventory.AllParts;
+                // Clears text input when a part is not found and the searchbar is not empty
+                if (partsSearchBar.Text != "")
+                {
+                    MessageBox.Show("Nothing Found.");
+                    partsSearchBar.Clear();
+                    
+                } else
+                {
+                    partsGridView.DataSource = Inventory.AllParts;
+                }
+
             }
 
-            // Put a reset next to search bar or put "RESET" in search bar
-
-
-            // ----- After I put it in lookUpPart() ----- //
-            // if (partsGridView.CurrentCell.Selected)
-            // Part CurrentPart = new Part(partsGridView.CurrentCell) 
-            // int Index = partsGridView.CurrentCell.RowIndex;
-            // Inventory.lookUpPart(Index, CurrentPart) 
         }
 
         private void productsSearchBar_TextChanged(object sender, EventArgs e)
         {
-            // Search for character in list - continue within that list, so it never exits the loop
-            // option to filter by specific param. i.e. name, price, id
-            // have a reset button to return to original list
-
-            // connect all of this to only search when "searchButton" is pressed
+            // Search for names of products in AllProducts
             BindingList<Product> TempProductsList = new BindingList<Product>();
             productsGridView.ClearSelection();
             bool productFound = false;
 
             if (productsSearchBar.Text != "")
             {
-                // this is where the switch statement would be placed -- While loop
-                for (int i = 0; i < Inventory.AllProducts.Count; i++)
+                for (int i = 0; i < Inventory.AllParts.Count; i++)
                 {
-
+                    // Searches Names of Parts in AllParts
                     if (Inventory.AllProducts[i].Name.ToUpper().Contains(productsSearchBar.Text.ToUpper()))
                     {
                         TempProductsList.Add(Inventory.AllProducts[i]);
                         productFound = true;
                     }
-
                 }
+
                 if (productFound)
                 {
                     productsGridView.DataSource = TempProductsList;
@@ -266,12 +257,20 @@ namespace AkariBowens_InventorySystem
 
             }
 
-            // This part is annoying. It pops up at every option, create a while loop?
-            // if (!productFound && productsSearchBar.Text != "") 
+            // When a part is not found 
             if (!productFound)
             {
-                MessageBox.Show("Nothing Found.");
-                productsGridView.DataSource = Inventory.AllProducts;
+                // Clears text input when a part is not found and the searchbar is not empty
+                if (productsSearchBar.Text != "")
+                {
+                    MessageBox.Show("Nothing Found.");
+                    productsSearchBar.Clear();
+                }
+                else
+                {
+                    productsGridView.DataSource = Inventory.AllProducts;
+                }
+
             }
         }
 

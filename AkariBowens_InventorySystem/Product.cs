@@ -6,7 +6,6 @@ namespace AkariBowens_InventorySystem
 {
     internal class Product
     {
-
         // Attributes 
         public BindingList<Part> AssociatedParts = new BindingList<Part>();
         public int ProductID { get; set; } 
@@ -18,17 +17,13 @@ namespace AkariBowens_InventorySystem
 
         public Product(int productIDNum, string productName, int numInStock, double productPrice, int Minimum, int Maximum)
         {
-             
             ProductID = productIDNum;
             Name = productName;
             InStock = numInStock;
             Price = Math.Round((decimal)productPrice, 2);
             Min = Minimum;
             Max = Maximum;
-            Console.WriteLine("Storing new product called " + productName + ".\n");
-        }
-
-        
+        }        
 
         // -----Methods----- //
         public void addAssociatedPart(Part newPart) 
@@ -37,17 +32,16 @@ namespace AkariBowens_InventorySystem
         }
         public bool removeAssociatedPart(int partIndex) 
         {
-            if (AssociatedParts.Remove(AssociatedParts[partIndex]))
+            if (AssociatedParts.Contains(Inventory.AllParts[partIndex]))
             {
                 return true;
             } else {
                 return false;
             }
         }
-        public static Part lookupAssociatedPart(int partIDNum)
+        public static Part lookupAssociatedPart(int partIndex)
         {
-            Part foundPart = Inventory.AllParts[partIDNum];
-            Console.Write("Found " + foundPart);
+            Part foundPart = Inventory.AllParts[partIndex];
             return foundPart;
         }
 

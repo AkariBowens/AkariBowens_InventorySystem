@@ -9,8 +9,7 @@ namespace AkariBowens_InventorySystem
     {
         
         public AddProductScreen()
-        {
-            // add BindingComplete to both DGVs
+        { 
             InitializeComponent();
         }
 
@@ -21,6 +20,7 @@ namespace AkariBowens_InventorySystem
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            // Confirmation
             Close();
         }
 
@@ -51,8 +51,8 @@ namespace AkariBowens_InventorySystem
 
             // ----- Associated Parts ----- //
 
-            Inventory.TempProduct.AssociatedParts.Clear();
-            var currentPartsAssociated = Inventory.TempProduct.AssociatedParts;
+            
+            BindingList<Part> currentPartsAssociated = Inventory.TempProduct.AssociatedParts;
             assocPartsGridView.DataSource = currentPartsAssociated;
 
             // Highlights full row on selection
@@ -66,6 +66,7 @@ namespace AkariBowens_InventorySystem
 
             // Removes empty bottom row
             assocPartsGridView.AllowUserToAddRows = false;
+
 
             // Disables ID textbox
             idTextBox.Enabled = false;
@@ -150,7 +151,8 @@ namespace AkariBowens_InventorySystem
 
             for (int i = 0; i < Inventory.TempProduct.AssociatedParts.Count; i++)
             {
-                NewProduct.AssociatedParts.Add(Inventory.TempProduct.AssociatedParts[i]);
+                //NewProduct.AssociatedParts.Add(Inventory.TempProduct.AssociatedParts[i]);
+                NewProduct.addAssociatedPart(Inventory.TempProduct.AssociatedParts[i]);
             }
 
             if (addProductMin > addProductMax)
@@ -180,7 +182,6 @@ namespace AkariBowens_InventorySystem
         {
             if (allPartsGridView.CurrentRow.Selected)
             { 
-                // if associatedparts list is !empty and first add, clear it 
                 Part currentPart = Inventory.LookupPart(allPartsGridView.CurrentRow.Index);
                 Inventory.TempProduct.addAssociatedPart(currentPart);
                 allPartsGridView.ClearSelection();
@@ -189,7 +190,14 @@ namespace AkariBowens_InventorySystem
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            if (assocPartsGridView.CurrentRow.Selected)
+            if (!assocPartsGridView.CurrentRow.Selected)
+            {
+                MessageBox.Show("Please select a part!");
+            }
+            
+            DialogResult = MessageBox.Show("Are you sure you want to remove this?", "Remove Part", MessageBoxButtons.YesNo);
+
+            if (DialogResult == DialogResult.Yes)
             {
                 Inventory.TempProduct.removeAssociatedPart(assocPartsGridView.CurrentRow.Index);
                 allPartsGridView.ClearSelection();
@@ -235,11 +243,22 @@ namespace AkariBowens_InventorySystem
                 }
             }
 
-            // This part is annoying. It pops up at every option, create a while loop?
+            
+            // When a part is not found 
             if (!partFound)
             {
-                MessageBox.Show("Nothing Found.");
-                allPartsGridView.DataSource = Inventory.AllParts;
+                // Clears text input when a part is not found and the searchbar is not empty
+                if (searchTextBox.Text != "")
+                {
+                    MessageBox.Show("Nothing Found.");
+                    searchTextBox.Clear();
+
+                }
+                else
+                {
+                    allPartsGridView.DataSource = Inventory.AllParts;
+                }
+
             }
         }
     }

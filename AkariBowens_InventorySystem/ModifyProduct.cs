@@ -20,7 +20,7 @@ namespace AkariBowens_InventorySystem
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            // Create a resetData method, instead of calling this every time
+            // Resets TempProduct
             Inventory.TempProduct = new Product(0, "", 0, 0, 0, 0);
             Close();
         }
@@ -88,20 +88,27 @@ namespace AkariBowens_InventorySystem
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            // Fills associatedParts on save and only if part is selected
-            if (allPartsGridView.CurrentRow.Selected)
+            if (!allPartsGridView.CurrentRow.Selected)
             {
-                Part currentPart = Inventory.AllParts[allPartsGridView.CurrentRow.Index];
-                Inventory.TempProduct.addAssociatedPart(currentPart);
-                allPartsGridView.ClearSelection();
+                MessageBox.Show("There is nothing selected!", "Make a selection");
+                return;
             }
+            Part currentPart = Inventory.AllParts[allPartsGridView.CurrentRow.Index];
+            Inventory.TempProduct.addAssociatedPart(currentPart);
+            allPartsGridView.ClearSelection();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            if (assocPartsGridView.CurrentRow.Selected)
+            if (!assocPartsGridView.CurrentRow.Selected)
             {
-                // Part currentPart = Inventory.TempProduct.AssociatedParts[assocPartsGridView.CurrentRow.Index];
+                MessageBox.Show("Please select a part!");
+            }
+
+            DialogResult = MessageBox.Show("Are you sure you want to remove this?", "Remove Part", MessageBoxButtons.YesNo);
+
+            if (DialogResult == DialogResult.Yes)
+            {
                 Inventory.TempProduct.removeAssociatedPart(assocPartsGridView.CurrentRow.Index);
                 allPartsGridView.ClearSelection();
             }
@@ -129,9 +136,6 @@ namespace AkariBowens_InventorySystem
                 }
                 else
                 {
-                    // Change these to message boxes on product and part
-                    Console.WriteLine("Inventory " + InventoryTextBox.Text + " not an integer" + "\n");
-
                     MessageBox.Show("Inventory: '" + InventoryTextBox.Text + "' must be a number!");
                     InventoryTextBox.BackColor = Color.Red;
                 }
@@ -146,8 +150,6 @@ namespace AkariBowens_InventorySystem
                 }
                 else
                 {
-                    // Change these to message boxes on product and part
-                    Console.WriteLine("Price " + priceTextBox.Text + " not a decimal" + "\n");
 
                     MessageBox.Show("Price: '" + priceTextBox.Text + "' must be a decimal!");
                     priceTextBox.BackColor = Color.Red;
@@ -164,9 +166,6 @@ namespace AkariBowens_InventorySystem
                 }
                 else
                 {
-                    // Change these to message boxes on product and part
-                    Console.WriteLine("Minimum " + minTextBox.Text + " not an int" + "\n");
-
                     MessageBox.Show("Minimum: '" + minTextBox.Text + "' must be a number!");
                     minTextBox.BackColor = Color.Red;
                 }
@@ -181,11 +180,16 @@ namespace AkariBowens_InventorySystem
                 }
                 else
                 {
-                    // Change these to message boxes on product and part
-                    Console.WriteLine("Maximum: " + maxTextBox.Text + " not an int" + "\n");
-
                     MessageBox.Show("Maximum: '" + maxTextBox.Text + "' must be a number!");
                     maxTextBox.BackColor = Color.Red;
+                }
+
+                //Initializes a new product instance with the above variables
+                Product NewProduct = new Product(Inventory.GlobalProductID++, addProductName, addProductInv, addProductPrice, addProductMin, addProductMax);
+
+                for (int i = 0; i < Inventory.TempProduct.AssociatedParts.Count; i++)
+                {
+                    NewProduct.addAssociatedPart(Inventory.TempProduct.AssociatedParts[i]);
                 }
 
                 if (addProductMin > addProductMax)
@@ -201,15 +205,6 @@ namespace AkariBowens_InventorySystem
                     isValid--;
                     MessageBox.Show("Inventory must be within min/max range.");
                     InventoryTextBox.BackColor = Color.Tomato;
-
-                }
-
-                //Initializes a new product instance with the above variables
-                Product NewProduct = new Product(Inventory.GlobalProductID++, addProductName, addProductInv, addProductPrice, addProductMin, addProductMax);
-
-                for (int i = 0; i < Inventory.TempProduct.AssociatedParts.Count; i++)
-                {
-                    NewProduct.AssociatedParts.Add(Inventory.TempProduct.AssociatedParts[i]);
                 }
 
                 if (isValid == 4)
@@ -219,18 +214,14 @@ namespace AkariBowens_InventorySystem
                     Inventory.UpdateProduct(ProductIdx, NewProduct);
                     Close();
                 }
-      
-        
         }
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-  
             BindingList<Part> TempPartsList = new BindingList<Part>();
             allPartsGridView.ClearSelection();
             bool partFound = false;
 
-            // 
             if (searchTextBox.Text != "")
             {
                 for (int i = 0; i < Inventory.AllParts.Count; i++)
@@ -248,12 +239,20 @@ namespace AkariBowens_InventorySystem
                 }
             }
 
-            // This part is annoying. It pops up at every option, create a while loop?
-            // if (!partFound && partsSearchBar.Text != "") 
+            // When a part is not found 
             if (!partFound)
             {
-                MessageBox.Show("Nothing Found.");
-                allPartsGridView.DataSource = Inventory.AllParts;
+                // Clears text input when a part is not found and the searchbar is not empty
+                if (searchTextBox.Text != "")
+                {
+                    MessageBox.Show("Nothing Found.");
+                    searchTextBox.Clear();
+                }
+                else
+                {
+                    allPartsGridView.DataSource = Inventory.AllParts;
+                }
+
             }
         }
     }

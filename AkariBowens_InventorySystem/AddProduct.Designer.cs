@@ -220,7 +220,7 @@
             // searchTextBox
             // 
             this.searchTextBox.Font = new System.Drawing.Font("Gadugi", 10F);
-            this.searchTextBox.Location = new System.Drawing.Point(1035, 78);
+            this.searchTextBox.Location = new System.Drawing.Point(1035, 82);
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(328, 34);
             this.searchTextBox.TabIndex = 56;
