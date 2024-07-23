@@ -20,7 +20,7 @@ namespace AkariBowens_InventorySystem
             ProductID = productIDNum;
             Name = productName;
             InStock = numInStock;
-            Price = Math.Round((decimal)productPrice, 2);
+            Price = decimal.Round((decimal)productPrice, 2);
             Min = Minimum;
             Max = Maximum;
         }        

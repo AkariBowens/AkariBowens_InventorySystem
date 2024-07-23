@@ -58,12 +58,11 @@
             // assocPartsGridView
             // 
             this.assocPartsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.assocPartsGridView.Location = new System.Drawing.Point(450, 310);
-            this.assocPartsGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.assocPartsGridView.Location = new System.Drawing.Point(675, 477);
             this.assocPartsGridView.Name = "assocPartsGridView";
             this.assocPartsGridView.RowHeadersWidth = 62;
             this.assocPartsGridView.RowTemplate.Height = 28;
-            this.assocPartsGridView.Size = new System.Drawing.Size(475, 135);
+            this.assocPartsGridView.Size = new System.Drawing.Size(712, 208);
             this.assocPartsGridView.TabIndex = 84;
             this.assocPartsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.assocPartsGridView_CellContentClick);
             this.assocPartsGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.assocPartsDGVBindingComplete);
@@ -71,22 +70,20 @@
             // allPartsGridView
             // 
             this.allPartsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.allPartsGridView.Location = new System.Drawing.Point(450, 90);
-            this.allPartsGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.allPartsGridView.Location = new System.Drawing.Point(675, 138);
             this.allPartsGridView.Name = "allPartsGridView";
             this.allPartsGridView.RowHeadersWidth = 62;
             this.allPartsGridView.RowTemplate.Height = 28;
-            this.allPartsGridView.Size = new System.Drawing.Size(475, 135);
+            this.allPartsGridView.Size = new System.Drawing.Size(712, 208);
             this.allPartsGridView.TabIndex = 83;
             this.allPartsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.allPartsGridView_CellContentClick);
             // 
             // deleteButton
             // 
             this.deleteButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteButton.Location = new System.Drawing.Point(845, 460);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deleteButton.Location = new System.Drawing.Point(1268, 708);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(62, 30);
+            this.deleteButton.Size = new System.Drawing.Size(93, 46);
             this.deleteButton.TabIndex = 82;
             this.deleteButton.Text = "Remove";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -95,10 +92,9 @@
             // cancelButton
             // 
             this.cancelButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(845, 505);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelButton.Location = new System.Drawing.Point(1268, 777);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(62, 31);
+            this.cancelButton.Size = new System.Drawing.Size(93, 48);
             this.cancelButton.TabIndex = 81;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -107,10 +103,9 @@
             // saveButton
             // 
             this.saveButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(760, 505);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.saveButton.Location = new System.Drawing.Point(1140, 777);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(62, 31);
+            this.saveButton.Size = new System.Drawing.Size(93, 48);
             this.saveButton.TabIndex = 80;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -119,20 +114,18 @@
             // searchTextBox
             // 
             this.searchTextBox.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchTextBox.Location = new System.Drawing.Point(690, 51);
-            this.searchTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.searchTextBox.Location = new System.Drawing.Point(1035, 78);
             this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(220, 25);
+            this.searchTextBox.Size = new System.Drawing.Size(328, 33);
             this.searchTextBox.TabIndex = 79;
             this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
             // addProductSearchButton
             // 
             this.addProductSearchButton.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addProductSearchButton.Location = new System.Drawing.Point(610, 50);
-            this.addProductSearchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addProductSearchButton.Location = new System.Drawing.Point(915, 77);
             this.addProductSearchButton.Name = "addProductSearchButton";
-            this.addProductSearchButton.Size = new System.Drawing.Size(72, 30);
+            this.addProductSearchButton.Size = new System.Drawing.Size(108, 46);
             this.addProductSearchButton.TabIndex = 78;
             this.addProductSearchButton.Text = "Search";
             this.addProductSearchButton.UseVisualStyleBackColor = true;
@@ -141,10 +134,9 @@
             // 
             this.modifyProductLabel.AutoSize = true;
             this.modifyProductLabel.Font = new System.Drawing.Font("Gadugi", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modifyProductLabel.Location = new System.Drawing.Point(45, 40);
-            this.modifyProductLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.modifyProductLabel.Location = new System.Drawing.Point(68, 62);
             this.modifyProductLabel.Name = "modifyProductLabel";
-            this.modifyProductLabel.Size = new System.Drawing.Size(216, 32);
+            this.modifyProductLabel.Size = new System.Drawing.Size(315, 48);
             this.modifyProductLabel.TabIndex = 77;
             this.modifyProductLabel.Text = "Modify Product";
             // 
@@ -152,10 +144,9 @@
             // 
             this.assocPartsLabel.AutoSize = true;
             this.assocPartsLabel.Font = new System.Drawing.Font("Gadugi", 9.75F);
-            this.assocPartsLabel.Location = new System.Drawing.Point(448, 280);
-            this.assocPartsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.assocPartsLabel.Location = new System.Drawing.Point(672, 431);
             this.assocPartsLabel.Name = "assocPartsLabel";
-            this.assocPartsLabel.Size = new System.Drawing.Size(203, 16);
+            this.assocPartsLabel.Size = new System.Drawing.Size(304, 24);
             this.assocPartsLabel.TabIndex = 76;
             this.assocPartsLabel.Text = "Parts Associated with this Product";
             // 
@@ -163,20 +154,18 @@
             // 
             this.allPartsLabel.AutoSize = true;
             this.allPartsLabel.Font = new System.Drawing.Font("Gadugi", 9.75F);
-            this.allPartsLabel.Location = new System.Drawing.Point(448, 60);
-            this.allPartsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.allPartsLabel.Location = new System.Drawing.Point(672, 92);
             this.allPartsLabel.Name = "allPartsLabel";
-            this.allPartsLabel.Size = new System.Drawing.Size(115, 16);
+            this.allPartsLabel.Size = new System.Drawing.Size(172, 24);
             this.allPartsLabel.TabIndex = 75;
             this.allPartsLabel.Text = "All candidate Parts";
             // 
             // addButton
             // 
             this.addButton.Font = new System.Drawing.Font("Gadugi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addButton.Location = new System.Drawing.Point(845, 240);
-            this.addButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addButton.Location = new System.Drawing.Point(1268, 369);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(62, 31);
+            this.addButton.Size = new System.Drawing.Size(93, 48);
             this.addButton.TabIndex = 74;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
@@ -186,10 +175,9 @@
             // 
             this.minBoxLabel.AutoSize = true;
             this.minBoxLabel.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minBoxLabel.Location = new System.Drawing.Point(210, 350);
-            this.minBoxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.minBoxLabel.Location = new System.Drawing.Point(315, 538);
             this.minBoxLabel.Name = "minBoxLabel";
-            this.minBoxLabel.Size = new System.Drawing.Size(36, 19);
+            this.minBoxLabel.Size = new System.Drawing.Size(54, 28);
             this.minBoxLabel.TabIndex = 73;
             this.minBoxLabel.Text = "Min";
             // 
@@ -197,10 +185,9 @@
             // 
             this.maxBoxLabel.AutoSize = true;
             this.maxBoxLabel.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maxBoxLabel.Location = new System.Drawing.Point(50, 350);
-            this.maxBoxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.maxBoxLabel.Location = new System.Drawing.Point(75, 538);
             this.maxBoxLabel.Name = "maxBoxLabel";
-            this.maxBoxLabel.Size = new System.Drawing.Size(38, 19);
+            this.maxBoxLabel.Size = new System.Drawing.Size(57, 28);
             this.maxBoxLabel.TabIndex = 72;
             this.maxBoxLabel.Text = "Max";
             // 
@@ -208,10 +195,9 @@
             // 
             this.priceCostBoxLabel.AutoSize = true;
             this.priceCostBoxLabel.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.priceCostBoxLabel.Location = new System.Drawing.Point(50, 300);
-            this.priceCostBoxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.priceCostBoxLabel.Location = new System.Drawing.Point(75, 462);
             this.priceCostBoxLabel.Name = "priceCostBoxLabel";
-            this.priceCostBoxLabel.Size = new System.Drawing.Size(43, 19);
+            this.priceCostBoxLabel.Size = new System.Drawing.Size(63, 28);
             this.priceCostBoxLabel.TabIndex = 71;
             this.priceCostBoxLabel.Text = "Price";
             // 
@@ -219,10 +205,9 @@
             // 
             this.inventoryBoxLabel.AutoSize = true;
             this.inventoryBoxLabel.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inventoryBoxLabel.Location = new System.Drawing.Point(50, 250);
-            this.inventoryBoxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.inventoryBoxLabel.Location = new System.Drawing.Point(75, 385);
             this.inventoryBoxLabel.Name = "inventoryBoxLabel";
-            this.inventoryBoxLabel.Size = new System.Drawing.Size(75, 19);
+            this.inventoryBoxLabel.Size = new System.Drawing.Size(113, 28);
             this.inventoryBoxLabel.TabIndex = 70;
             this.inventoryBoxLabel.Text = "Inventory";
             // 
@@ -230,10 +215,9 @@
             // 
             this.nameBoxLabel.AutoSize = true;
             this.nameBoxLabel.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameBoxLabel.Location = new System.Drawing.Point(50, 200);
-            this.nameBoxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.nameBoxLabel.Location = new System.Drawing.Point(75, 308);
             this.nameBoxLabel.Name = "nameBoxLabel";
-            this.nameBoxLabel.Size = new System.Drawing.Size(51, 19);
+            this.nameBoxLabel.Size = new System.Drawing.Size(76, 28);
             this.nameBoxLabel.TabIndex = 69;
             this.nameBoxLabel.Text = "Name";
             // 
@@ -241,72 +225,70 @@
             // 
             this.idBoxLabel.AutoSize = true;
             this.idBoxLabel.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.idBoxLabel.Location = new System.Drawing.Point(50, 150);
-            this.idBoxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.idBoxLabel.Location = new System.Drawing.Point(75, 231);
             this.idBoxLabel.Name = "idBoxLabel";
-            this.idBoxLabel.Size = new System.Drawing.Size(24, 19);
+            this.idBoxLabel.Size = new System.Drawing.Size(35, 28);
             this.idBoxLabel.TabIndex = 68;
             this.idBoxLabel.Text = "ID";
             // 
             // minTextBox
             // 
             this.minTextBox.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minTextBox.Location = new System.Drawing.Point(257, 340);
-            this.minTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.minTextBox.Location = new System.Drawing.Point(386, 523);
             this.minTextBox.Name = "minTextBox";
-            this.minTextBox.Size = new System.Drawing.Size(95, 29);
+            this.minTextBox.Size = new System.Drawing.Size(140, 39);
             this.minTextBox.TabIndex = 67;
+            this.minTextBox.TextChanged += new System.EventHandler(this.minTextBox_TextChanged);
             // 
             // maxTextBox
             // 
             this.maxTextBox.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maxTextBox.Location = new System.Drawing.Point(101, 340);
-            this.maxTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.maxTextBox.Location = new System.Drawing.Point(152, 523);
             this.maxTextBox.Name = "maxTextBox";
-            this.maxTextBox.Size = new System.Drawing.Size(95, 29);
+            this.maxTextBox.Size = new System.Drawing.Size(140, 39);
             this.maxTextBox.TabIndex = 66;
+            this.maxTextBox.TextChanged += new System.EventHandler(this.maxTextBox_TextChanged);
             // 
-            // priceCostTextBox
+            // priceTextBox
             // 
             this.priceTextBox.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.priceTextBox.Location = new System.Drawing.Point(151, 290);
-            this.priceTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.priceTextBox.Name = "priceCostTextBox";
-            this.priceTextBox.Size = new System.Drawing.Size(155, 29);
+            this.priceTextBox.Location = new System.Drawing.Point(226, 446);
+            this.priceTextBox.Name = "priceTextBox";
+            this.priceTextBox.Size = new System.Drawing.Size(230, 39);
             this.priceTextBox.TabIndex = 65;
+            this.priceTextBox.TextChanged += new System.EventHandler(this.priceTextBox_TextChanged);
             // 
             // InventoryTextBox
             // 
             this.InventoryTextBox.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InventoryTextBox.Location = new System.Drawing.Point(151, 240);
-            this.InventoryTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.InventoryTextBox.Location = new System.Drawing.Point(226, 369);
             this.InventoryTextBox.Name = "InventoryTextBox";
-            this.InventoryTextBox.Size = new System.Drawing.Size(155, 29);
+            this.InventoryTextBox.Size = new System.Drawing.Size(230, 39);
             this.InventoryTextBox.TabIndex = 64;
+            this.InventoryTextBox.TextChanged += new System.EventHandler(this.InventoryTextBox_TextChanged);
             // 
             // nameTextBox
             // 
             this.nameTextBox.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameTextBox.Location = new System.Drawing.Point(151, 190);
-            this.nameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nameTextBox.Location = new System.Drawing.Point(226, 292);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(155, 29);
+            this.nameTextBox.Size = new System.Drawing.Size(230, 39);
             this.nameTextBox.TabIndex = 63;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
             // 
             // idTextBox
             // 
             this.idTextBox.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.idTextBox.Location = new System.Drawing.Point(151, 140);
-            this.idTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.idTextBox.Location = new System.Drawing.Point(226, 215);
             this.idTextBox.Name = "idTextBox";
-            this.idTextBox.Size = new System.Drawing.Size(155, 29);
+            this.idTextBox.Size = new System.Drawing.Size(230, 39);
             this.idTextBox.TabIndex = 62;
             // 
             // ModifyProduct
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(959, 571);
+            this.ClientSize = new System.Drawing.Size(1438, 878);
             this.Controls.Add(this.assocPartsGridView);
             this.Controls.Add(this.allPartsGridView);
             this.Controls.Add(this.deleteButton);
@@ -330,7 +312,6 @@
             this.Controls.Add(this.InventoryTextBox);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.idTextBox);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ModifyProduct";
             this.Text = "Product";
             this.Load += new System.EventHandler(this.ModifyProduct_Load);

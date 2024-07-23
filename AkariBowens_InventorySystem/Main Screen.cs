@@ -97,6 +97,10 @@ namespace AkariBowens_InventorySystem
             // Removes empty bottom row
             productsGridView.AllowUserToAddRows = false;
 
+            // ----- Formatting ----- //
+            productsGridView.Columns["Max"].Visible = false;
+            productsGridView.Columns["Min"].Visible = false;
+
             // ----------------------------------------------//
 
             // Sets AllParts DataSource //
@@ -113,7 +117,16 @@ namespace AkariBowens_InventorySystem
 
             // Removes empty bottom row
             partsGridView.AllowUserToAddRows = false;
-    }
+
+            // ----- Formatting ----- //
+            partsGridView.Columns["Max"].Visible = false;
+            partsGridView.Columns["Min"].Visible = false;
+       
+            // ---------- Do in Main Screen (Product/Part), AddProduct, ModifyProduct //
+            // Hide Min/Max, Change 'InStock' to 'Inventory', Change 'PartID' to 'Part ID', Change 'ProductID' to 'Product ID'
+        }
+
+        
 
         private void partsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

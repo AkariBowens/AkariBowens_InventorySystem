@@ -34,7 +34,7 @@
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.InventoryTextBox = new System.Windows.Forms.TextBox();
             this.addPartLabel = new System.Windows.Forms.Label();
-            this.priceCostTextBox = new System.Windows.Forms.TextBox();
+            this.priceTextBox = new System.Windows.Forms.TextBox();
             this.maxTextBox = new System.Windows.Forms.TextBox();
             this.minTextBox = new System.Windows.Forms.TextBox();
             this.varInputTextBox = new System.Windows.Forms.TextBox();
@@ -110,14 +110,14 @@
             this.addPartLabel.TabIndex = 7;
             this.addPartLabel.Text = "Add Part";
             // 
-            // priceCostTextBox
+            // priceTextBox
             // 
-            this.priceCostTextBox.Font = new System.Drawing.Font("Gadugi", 12F);
-            this.priceCostTextBox.Location = new System.Drawing.Point(229, 324);
-            this.priceCostTextBox.Name = "priceCostTextBox";
-            this.priceCostTextBox.Size = new System.Drawing.Size(155, 39);
-            this.priceCostTextBox.TabIndex = 8;
-            this.priceCostTextBox.TextChanged += new System.EventHandler(this.priceCostTextBox_TextChanged);
+            this.priceTextBox.Font = new System.Drawing.Font("Gadugi", 12F);
+            this.priceTextBox.Location = new System.Drawing.Point(229, 324);
+            this.priceTextBox.Name = "priceTextBox";
+            this.priceTextBox.Size = new System.Drawing.Size(155, 39);
+            this.priceTextBox.TabIndex = 8;
+            this.priceTextBox.TextChanged += new System.EventHandler(this.priceTextBox_TextChanged);
             // 
             // maxTextBox
             // 
@@ -272,7 +272,7 @@
             this.Controls.Add(this.idBoxLabel);
             this.Controls.Add(this.minTextBox);
             this.Controls.Add(this.maxTextBox);
-            this.Controls.Add(this.priceCostTextBox);
+            this.Controls.Add(this.priceTextBox);
             this.Controls.Add(this.addPartLabel);
             this.Controls.Add(this.InventoryTextBox);
             this.Controls.Add(this.nameTextBox);
@@ -298,7 +298,7 @@
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.TextBox InventoryTextBox;
         private System.Windows.Forms.Label addPartLabel;
-        private System.Windows.Forms.TextBox priceCostTextBox;
+        private System.Windows.Forms.TextBox priceTextBox;
         private System.Windows.Forms.TextBox maxTextBox;
         private System.Windows.Forms.TextBox minTextBox;
         private System.Windows.Forms.TextBox varInputTextBox;

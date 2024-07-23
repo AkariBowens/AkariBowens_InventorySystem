@@ -38,7 +38,7 @@
             this.varInputTextBox = new System.Windows.Forms.TextBox();
             this.minTextBox = new System.Windows.Forms.TextBox();
             this.maxTextBox = new System.Windows.Forms.TextBox();
-            this.priceCostTextBox = new System.Windows.Forms.TextBox();
+            this.priceTextBox = new System.Windows.Forms.TextBox();
             this.modifyPartLabel = new System.Windows.Forms.Label();
             this.InventoryTextBox = new System.Windows.Forms.TextBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
@@ -144,6 +144,7 @@
             this.minTextBox.Name = "minTextBox";
             this.minTextBox.Size = new System.Drawing.Size(95, 39);
             this.minTextBox.TabIndex = 29;
+            this.minTextBox.TextChanged += new System.EventHandler(this.minTextBox_TextChanged);
             // 
             // maxTextBox
             // 
@@ -152,14 +153,16 @@
             this.maxTextBox.Name = "maxTextBox";
             this.maxTextBox.Size = new System.Drawing.Size(95, 39);
             this.maxTextBox.TabIndex = 28;
+            this.maxTextBox.TextChanged += new System.EventHandler(this.maxTextBox_TextChanged);
             // 
-            // priceCostTextBox
+            // priceTextBox
             // 
-            this.priceCostTextBox.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.priceCostTextBox.Location = new System.Drawing.Point(229, 325);
-            this.priceCostTextBox.Name = "priceCostTextBox";
-            this.priceCostTextBox.Size = new System.Drawing.Size(155, 39);
-            this.priceCostTextBox.TabIndex = 27;
+            this.priceTextBox.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.priceTextBox.Location = new System.Drawing.Point(229, 325);
+            this.priceTextBox.Name = "priceTextBox";
+            this.priceTextBox.Size = new System.Drawing.Size(155, 39);
+            this.priceTextBox.TabIndex = 27;
+            this.priceTextBox.TextChanged += new System.EventHandler(this.priceTextBox_TextChanged);
             // 
             // modifyPartLabel
             // 
@@ -179,6 +182,7 @@
             this.InventoryTextBox.Name = "InventoryTextBox";
             this.InventoryTextBox.Size = new System.Drawing.Size(155, 39);
             this.InventoryTextBox.TabIndex = 25;
+            this.InventoryTextBox.TextChanged += new System.EventHandler(this.InventoryTextBox_TextChanged);
             // 
             // nameTextBox
             // 
@@ -187,6 +191,7 @@
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(155, 39);
             this.nameTextBox.TabIndex = 24;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
             // 
             // idTextBox
             // 
@@ -279,7 +284,7 @@
             this.Controls.Add(this.varInputTextBox);
             this.Controls.Add(this.minTextBox);
             this.Controls.Add(this.maxTextBox);
-            this.Controls.Add(this.priceCostTextBox);
+            this.Controls.Add(this.priceTextBox);
             this.Controls.Add(this.modifyPartLabel);
             this.Controls.Add(this.InventoryTextBox);
             this.Controls.Add(this.nameTextBox);
@@ -310,7 +315,7 @@
         private System.Windows.Forms.TextBox varInputTextBox;
         private System.Windows.Forms.TextBox minTextBox;
         private System.Windows.Forms.TextBox maxTextBox;
-        private System.Windows.Forms.TextBox priceCostTextBox;
+        private System.Windows.Forms.TextBox priceTextBox;
         private System.Windows.Forms.Label modifyPartLabel;
         private System.Windows.Forms.TextBox InventoryTextBox;
         private System.Windows.Forms.TextBox nameTextBox;

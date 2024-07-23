@@ -12,10 +12,9 @@ namespace AkariBowens_InventorySystem
 
     {
         // Attributes //
-        private BindingList<Product> _allProducts = new BindingList<Product>();
+
         public static BindingList<Product> AllProducts = new BindingList<Product>();
 
-        private static BindingList<Part> _allParts = new BindingList<Part>();
         public static BindingList<Part> AllParts = new BindingList<Part>();
 
         public static Part SelectedPart { get; set; }
@@ -54,7 +53,7 @@ namespace AkariBowens_InventorySystem
 
         public static void UpdateProduct(int productIdx, Product OriginalProduct) 
         {
-            // Gets item in AllProducts and updates item in AllParts on contrasting property values
+            // Gets item in AllProducts and updates item in AllParts where property values are different
 
             // Sets product to be changed
             Product productToChange = AllProducts[productIdx];
@@ -147,8 +146,6 @@ namespace AkariBowens_InventorySystem
                 InHouse savedPart = (InHouse)currentPart;
                 InHouse partToUpdate = (InHouse)AllParts[partIndex];
 
-                // Reconfigure this later
-                
                 if (partToUpdate.Name != savedPart.Name)
                 {
                     Console.WriteLine("Changing PartName " + partToUpdate.Name + " to " + savedPart.Name + "\n");
@@ -270,7 +267,7 @@ namespace AkariBowens_InventorySystem
         static Inventory()
         {
             // Adds default parts to AllProducts
-            AllProducts.Add(new Product(GlobalProductID++, "testProduct1", 4, 210.99, 0, 5));
+            AllProducts.Add(new Product(GlobalProductID++, "Complex Machine", 4, 210.99, 0, 5));
             AllProducts.Add(new Product(GlobalProductID++, "testProduct2", 1, 211.99, 0, 2));
             AllProducts.Add(new Product(GlobalProductID++, "testProduct3", 1, 212.99, 0, 3));
 
@@ -278,7 +275,6 @@ namespace AkariBowens_InventorySystem
             AllParts.Add(new InHouse(GlobalPartID++, "Right Angle Fitting", 3, 213.99, 0, 8, 102256));
             AllParts.Add(new Outsourced(GlobalPartID++, "testPart5", 1, 214.99, 0, 3, "DirectLine Inc."));
             AllParts.Add(new InHouse(GlobalPartID++, "testPart6", 2, 215.99, 0, 6, 1065578));
-
         }
     };
     

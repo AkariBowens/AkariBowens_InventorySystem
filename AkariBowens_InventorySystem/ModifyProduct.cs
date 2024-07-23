@@ -13,6 +13,12 @@ namespace AkariBowens_InventorySystem
 {
     public partial class ModifyProduct : Form
     {
+        private string addProductName;
+        private int addProductInv;
+        private double addProductPrice;
+        private int addProductMin;
+        private int addProductMax;
+
         public ModifyProduct()
         {
             InitializeComponent();
@@ -84,8 +90,25 @@ namespace AkariBowens_InventorySystem
             maxTextBox.Text = Inventory.TempProduct.Max.ToString();
             minTextBox.Text = Inventory.TempProduct.Min.ToString();
 
+            saveButton.Enabled = false;
+        }
+        
+        private bool textBoxesAreValid()
+        {
+            return (!string.IsNullOrEmpty(nameTextBox.Text)
+                && int.TryParse(InventoryTextBox.Text, out addProductInv)
+                && double.TryParse(priceTextBox.Text, out addProductPrice)
+                && int.TryParse(minTextBox.Text, out addProductMin)
+                && int.TryParse(maxTextBox.Text, out addProductMax));
         }
 
+        private void toggleSaveButton()
+        {
+            if (textBoxesAreValid())
+            {
+                saveButton.Enabled = true;
+            }
+        }
         private void addButton_Click(object sender, EventArgs e)
         {
             if (!allPartsGridView.CurrentRow.Selected)
@@ -121,68 +144,7 @@ namespace AkariBowens_InventorySystem
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-                
-                int isValid = 0;
-
-                string addProductName = nameTextBox.Text;
-
-                // Checks if inventory input is an int
-                int addProductInv;
-                if (int.TryParse(InventoryTextBox.Text, out addProductInv))
-                {
-                    Console.WriteLine("Converting " + addProductInv + " ..." + "\n");
-                    isValid++;
-                    InventoryTextBox.BackColor = Color.White;
-                }
-                else
-                {
-                    MessageBox.Show("Inventory: '" + InventoryTextBox.Text + "' must be a number!");
-                    InventoryTextBox.BackColor = Color.Red;
-                }
-
-                // Checks if partPrice input is a decimal
-                double addProductPrice;
-                if (double.TryParse(priceTextBox.Text, out addProductPrice))
-                {
-                    Console.WriteLine("Converting " + addProductPrice + "..." + "\n");
-                    isValid++;
-                    priceTextBox.BackColor = Color.White;
-                }
-                else
-                {
-
-                    MessageBox.Show("Price: '" + priceTextBox.Text + "' must be a decimal!");
-                    priceTextBox.BackColor = Color.Red;
-                }
-
-                // Make sure part is an int
-                int addProductMin;
-
-                if (int.TryParse(minTextBox.Text, out addProductMin))
-                {
-                    Console.WriteLine("Converting " + addProductMin + " ..." + "\n");
-                    isValid++;
-                    minTextBox.BackColor = Color.White;
-                }
-                else
-                {
-                    MessageBox.Show("Minimum: '" + minTextBox.Text + "' must be a number!");
-                    minTextBox.BackColor = Color.Red;
-                }
-
-                // Checks if partPrice input is an int
-                int addProductMax;
-                if (int.TryParse(maxTextBox.Text, out addProductMax))
-                {
-                    Console.WriteLine("Converting " + addProductMax + "..." + "\n");
-                    isValid++;
-                    maxTextBox.BackColor = Color.White;
-                }
-                else
-                {
-                    MessageBox.Show("Maximum: '" + maxTextBox.Text + "' must be a number!");
-                    maxTextBox.BackColor = Color.Red;
-                }
+ 
 
                 //Initializes a new product instance with the above variables
                 Product NewProduct = new Product(Inventory.GlobalProductID++, addProductName, addProductInv, addProductPrice, addProductMin, addProductMax);
@@ -194,7 +156,6 @@ namespace AkariBowens_InventorySystem
 
                 if (addProductMin > addProductMax)
                 {
-                    isValid--;
                     MessageBox.Show("Minimum must be less than Maximum.");
                     maxTextBox.BackColor = Color.Tomato;
                     minTextBox.BackColor = Color.Tomato;
@@ -202,12 +163,16 @@ namespace AkariBowens_InventorySystem
 
                 if (addProductInv < addProductMin || addProductInv > addProductMax)
                 {
-                    isValid--;
                     MessageBox.Show("Inventory must be within min/max range.");
                     InventoryTextBox.BackColor = Color.Tomato;
                 }
 
-                if (isValid == 4)
+                bool inputsAreValid()
+                {
+                    return (addProductMin <= addProductInv) && (addProductMax >= addProductInv) && (addProductMin < addProductMax);
+                }
+
+                if (textBoxesAreValid() && inputsAreValid())
                 {
                     Console.WriteLine("Associated Parts: " + NewProduct.AssociatedParts.Count + "\n");
                     int ProductIdx = Inventory.TempProductIndex;
@@ -253,6 +218,86 @@ namespace AkariBowens_InventorySystem
                     allPartsGridView.DataSource = Inventory.AllParts;
                 }
 
+            }
+        }
+
+        private void nameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            //If nameTextBox input is null, empty, or whitespace its color changes 
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+            {
+                MessageBox.Show("Name cannot be empty!");
+                nameTextBox.BackColor = Color.Tomato;
+            }
+            else
+            {
+                toggleSaveButton();
+                nameTextBox.BackColor = Color.White;
+                addProductName = nameTextBox.Text;
+            }
+        }
+
+        private void InventoryTextBox_TextChanged(object sender, EventArgs e)
+        {
+            //If InventoryTextBox input can be converted to an integer its color changes 
+            if (int.TryParse(InventoryTextBox.Text, out addProductInv))
+            {
+                Console.WriteLine("Converting " + addProductInv + " ...");
+                toggleSaveButton();
+            }
+            else if (InventoryTextBox.Text != "")
+            {
+                MessageBox.Show("Inventory: '" + InventoryTextBox.Text + "' must be a number!");
+                InventoryTextBox.BackColor = Color.Red;
+                InventoryTextBox.Clear();
+            }
+        }
+
+        private void priceTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Checks if partPrice input is a double
+            if (double.TryParse(priceTextBox.Text, out addProductPrice) && priceTextBox.Text != "")
+            {
+                Console.WriteLine("Converting " + addProductPrice + "...");
+                toggleSaveButton();
+            }
+            else if (priceTextBox.Text != "")
+            {
+                MessageBox.Show("Price: '" + priceTextBox.Text + "' must be a decimal!");
+                priceTextBox.BackColor = Color.Tomato;
+                priceTextBox.Clear();
+            }
+        }
+
+        private void maxTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Checks if min input is an integer
+            if (int.TryParse(maxTextBox.Text, out addProductMax) && maxTextBox.Text != "")
+            {
+                Console.WriteLine("Converting " + addProductMax + "...");
+                toggleSaveButton();
+            }
+            else if (maxTextBox.Text != "")
+            {
+                MessageBox.Show("Maximum: '" + maxTextBox.Text + "' must be a number!");
+                maxTextBox.BackColor = Color.Tomato;
+                maxTextBox.Clear();
+            }
+        }
+
+        private void minTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Checks if min input is an integer
+            if (int.TryParse(minTextBox.Text, out addProductMin) && minTextBox.Text != "")
+            {
+                Console.WriteLine("Converting " + addProductMin + "...");
+                toggleSaveButton();
+            }
+            else if (maxTextBox.Text != "" )
+            {
+                 MessageBox.Show("Minimum: '" + minTextBox.Text + "' must be a number!");
+                 minTextBox.BackColor = Color.Tomato;
+                 minTextBox.Clear();
             }
         }
     }

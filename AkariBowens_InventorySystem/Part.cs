@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace AkariBowens_InventorySystem
 {
-    // class Part is abstract
-    // add abstract keyword
     internal abstract class Part
     {
         // Attributes
@@ -36,7 +34,7 @@ namespace AkariBowens_InventorySystem
             InStock = partsInStock;
             
             // Formats partPrice to $XXX.XX
-            Price = Math.Round((decimal)partPrice, 2);
+            Price = decimal.Round((decimal)partPrice, 2);
             Min = partMin;
             Max = partMax;
         }

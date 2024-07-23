@@ -7,10 +7,12 @@ namespace AkariBowens_InventorySystem
 {
     public partial class AddPartScreen : Form
     {
-
-        // Radio buttons apply class "inHouse" or "outsourced"
-        // Inventory.addPart();
-
+        private string addPartName;
+                //= nameTextBox.Text;
+        private int addPartInv;
+        private double addPartPrice;
+        private int addPartMax;
+        private int addPartMin;
         public AddPartScreen()
         {
             InitializeComponent();
@@ -33,6 +35,24 @@ namespace AkariBowens_InventorySystem
             // starts with one or the other checked
             outsourcedRadioButton.Checked = true;
             idTextBox.Enabled = false;
+            addPartSave.Enabled = false;
+        }
+
+        private bool textBoxesAreValid()
+        {
+            return (!string.IsNullOrWhiteSpace(nameTextBox.Text)
+                && int.TryParse(InventoryTextBox.Text, out addPartInv)
+                && double.TryParse(priceTextBox.Text, out addPartPrice)
+                && int.TryParse(minTextBox.Text, out addPartMin)
+                && int.TryParse(maxTextBox.Text, out addPartMax));
+        }
+
+        private void toggleSaveButton()
+        {
+            if (textBoxesAreValid())
+            {
+                addPartSave.Enabled = true;
+            }
         }
 
         private void inHouseRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -56,69 +76,8 @@ namespace AkariBowens_InventorySystem
         {
 
             // Limit partPrice to two decimal places -- make new variables for new Part 
-            int isValid = 0;
-
-            string addPartName = nameTextBox.Text;
-
-            // Checks if inventory input is an int
-            int addPartInv;
-            if (int.TryParse(InventoryTextBox.Text, out addPartInv))
-            {
-                Console.WriteLine("Converting " + addPartInv + " ...\n");
-                isValid ++;
-                
-            }
-            else
-            {
-                Console.WriteLine("Input " + InventoryTextBox.Text + " not an integer\n");
-                InventoryTextBox.BackColor = Color.Red;
-            }
-
-            // Checks if partPrice input is a decimal
-            double addPartPrice;
-            if (double.TryParse(priceCostTextBox.Text, out addPartPrice))
-            {
-                Console.WriteLine("Converting " + addPartPrice + "...\n");
-                isValid ++;
-               
-            }
-            else
-            {
-                Console.WriteLine("Input " + priceCostTextBox.Text + " not a decimal\n");
-                priceCostTextBox.BackColor = Color.Red;
-            }
-
-            // Checks if partMax input is an int
-            int addPartMax;
-            if (int.TryParse(maxTextBox.Text, out addPartMax))
-            {
-                Console.WriteLine("Converting " + addPartMax + "...\n");
-                isValid ++;
-                
-            }
-            else
-            {
-                Console.WriteLine("Input " + maxTextBox.Text + " not an \n");
-                maxTextBox.BackColor = Color.Red;
-            }
-
-            // Make sure part is (int)
-            int addPartMin;
-            if (int.TryParse(minTextBox.Text, out addPartMin))
-            {
-                Console.WriteLine("Converting " + addPartMin + " ...\n");
-                isValid ++;
-               
-            }
-            else
-            {
-                Console.WriteLine("Input " + minTextBox.Text + " not an int\n");
-                minTextBox.BackColor = Color.Red;
-            }
-
             if (addPartMin > addPartMax)
             {
-                isValid--;
                 MessageBox.Show("Minimum must be less than Maximum.");
                 maxTextBox.BackColor = Color.Tomato;
                 minTextBox.BackColor = Color.Tomato;
@@ -126,18 +85,18 @@ namespace AkariBowens_InventorySystem
 
             if (addPartInv < addPartMin || addPartInv > addPartMax)
             {
-                isValid--;
                 MessageBox.Show("Inventory must be within min/max range.");
                 InventoryTextBox.BackColor = Color.Tomato;
             }
 
-
-
-            if (isValid == 4)
+            bool inputsAreValid()
             {
-                // I need to make sure that one of these is absolutely checked
+                return (addPartMin <= addPartInv) && (addPartMax >= addPartInv) && (addPartMin < addPartMax);
+            }
 
-                if (varInputTextBox.Text != null && varInputTextBox.Text != "")
+            if (textBoxesAreValid() && inputsAreValid())
+            {
+                if (varInputTextBox.Text != null && varInputTextBox.Text != "" )
                 {
                     if (inHouseRadioButton.Checked == true)
                     {
@@ -162,15 +121,12 @@ namespace AkariBowens_InventorySystem
 
                     if (outsourcedRadioButton.Checked == true)
                     {
-                        
                         string addPartCompanyName = varInputTextBox.Text;
                         Outsourced NewPart = new Outsourced(Inventory.GlobalPartID++, addPartName, addPartInv, addPartPrice, addPartMax, addPartMin, addPartCompanyName);
                       
                         Inventory.addPart(NewPart);
                         Close();
                     }
-                    // Basically make this a bool outside of this entire if statement, so it can be changed within validation, if any change it to false, then it's false
-                    addPartSave.Enabled = true;
                 }
 
             }
@@ -184,7 +140,18 @@ namespace AkariBowens_InventorySystem
 
         private void minTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            // Checks if max input is an integer
+            if (int.TryParse(minTextBox.Text, out addPartMin) && minTextBox.Text != "")
+            {
+                Console.WriteLine("Converting " + addPartMin + " ...");
+                toggleSaveButton();
+            }
+            else if (minTextBox.Text != "")
+            {
+                MessageBox.Show("Minimum: '" + minTextBox.Text + "' must be a number!");
+                minTextBox.BackColor = Color.Tomato;
+                minTextBox.Clear();
+            }
         }
 
         private void idTextBox_TextChanged(object sender, EventArgs e)
@@ -199,22 +166,66 @@ namespace AkariBowens_InventorySystem
 
         private void maxTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            // Checks if min input is an integer
+            if (int.TryParse(maxTextBox.Text, out addPartMax) && maxTextBox.Text != "")
+            {
+                Console.WriteLine("Converting " + addPartMax + "...");
+                toggleSaveButton();
+            }
+            else if (maxTextBox.Text != "")
+            {
+                MessageBox.Show("Maximum: '" + maxTextBox.Text + "' must be a number!");
+                maxTextBox.BackColor = Color.Tomato;
+                maxTextBox.Clear();
+            }
         }
 
-        private void priceCostTextBox_TextChanged(object sender, EventArgs e)
+        private void priceTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            // Checks if partPrice input is a double
+            if (double.TryParse(priceTextBox.Text, out addPartPrice) && priceTextBox.Text != "")
+            {
+                Console.WriteLine("Converting " + addPartPrice + "...");
+                toggleSaveButton();
+            }
+            else if (priceTextBox.Text != "")
+            {
+                MessageBox.Show("Price: '" + priceTextBox.Text + "' must be a decimal!");
+                priceTextBox.BackColor = Color.Tomato;
+                priceTextBox.Clear();
+            }
         }
 
         private void InventoryTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            //Checks if InventoryTextBox is an integer 
+            if (int.TryParse(InventoryTextBox.Text, out addPartInv))
+            {
+                Console.WriteLine("Converting " + addPartInv + " ...");
+                toggleSaveButton();
+            }
+            else if (InventoryTextBox.Text != "")
+            {
+                MessageBox.Show("Inventory: '" + InventoryTextBox.Text + "' must be a number!");
+                InventoryTextBox.BackColor = Color.Red;
+                InventoryTextBox.Clear();
+            }
         }
 
         private void nameTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            //If nameTextBox input is null, empty, or whitespace its color changes 
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+            {
+                MessageBox.Show("Name cannot be empty!");
+                nameTextBox.BackColor = Color.Tomato;
+            }
+            else
+            {
+                toggleSaveButton();
+                nameTextBox.BackColor = Color.White;
+                addPartName = nameTextBox.Text;
+            }
         }
 
         private void minBoxLabel_Click(object sender, EventArgs e)
