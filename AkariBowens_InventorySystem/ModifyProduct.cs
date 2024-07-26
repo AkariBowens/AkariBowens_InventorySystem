@@ -119,10 +119,12 @@ namespace AkariBowens_InventorySystem
             Part currentPart = Inventory.AllParts[allPartsGridView.CurrentRow.Index];
             Inventory.TempProduct.addAssociatedPart(currentPart);
             allPartsGridView.ClearSelection();
+            toggleSaveButton();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
+            
             if (!assocPartsGridView.CurrentRow.Selected)
             {
                 MessageBox.Show("Please select a part!");
@@ -134,6 +136,7 @@ namespace AkariBowens_InventorySystem
             {
                 Inventory.TempProduct.removeAssociatedPart(assocPartsGridView.CurrentRow.Index);
                 allPartsGridView.ClearSelection();
+                toggleSaveButton();
             }
         }
 

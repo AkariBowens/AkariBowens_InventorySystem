@@ -30,14 +30,10 @@ namespace AkariBowens_InventorySystem
         {
             AssociatedParts.Add(newPart);
         }
-        public bool removeAssociatedPart(int partIndex) 
+
+        public bool removeAssociatedPart(int partIndex)
         {
-            if (AssociatedParts.Contains(Inventory.AllParts[partIndex]))
-            {
-                return true;
-            } else {
-                return false;
-            }
+            return AssociatedParts.Remove(AssociatedParts[partIndex]);
         }
         public static Part lookupAssociatedPart(int partIndex)
         {

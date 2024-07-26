@@ -51,8 +51,6 @@ namespace AkariBowens_InventorySystem
             } 
         }
 
-        
-
         private void AddProductScreen_Load(object sender, EventArgs e)
         {
 
@@ -142,6 +140,7 @@ namespace AkariBowens_InventorySystem
                 Inventory.TempProduct.addAssociatedPart(currentPart);
                 allPartsGridView.ClearSelection();
             }
+            toggleSaveButton();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -157,6 +156,7 @@ namespace AkariBowens_InventorySystem
             {
                 Inventory.TempProduct.removeAssociatedPart(assocPartsGridView.CurrentRow.Index);
                 allPartsGridView.ClearSelection();
+                toggleSaveButton();
             }
         }
 
