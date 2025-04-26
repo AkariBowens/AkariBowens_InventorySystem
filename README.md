@@ -11,7 +11,7 @@ Developed a custom inventory management system for a small manufacturing organiz
 
 **Technologies Used**
 - C#, .NET 
-- SQL or local storage
+- Local storage
 - Windows Forms
 
 ---
